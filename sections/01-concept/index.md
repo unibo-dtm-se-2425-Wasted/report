@@ -4,19 +4,45 @@ has_children: false
 nav_order: 2
 ---
 
-# Concept
+# Project Overview
 
-Here you should explain:
-- The type of product developed with that project, for example (non-exhaustive):
-    - Application (with GUI, be it mobile, web, or desktop)
-    - Command-line application (CLI could be used by humans or scripts)
-    - Library
-    - Web-service(s)
-    - Data processing toolkit (= Library + CLI, or Jupyter Notebook)
+This project aims to develop a **user-friendly application** designed to help users manage the contents of their fridge or pantry, with the ultimate goal of **reducing food waste at home**.  
 
-- Use case collection
-    - Where are the users?
-    - When and how frequently do they interact with the system?
-    - How do they interact with the system? Which devices are they using?
-    - Does the system need to store user's data? Which data? Where?
-    - Most likely, there will be multiple roles.
+The app will allow users to:  
+- efficiently keep track of food items,  
+- monitor expiration dates, and  
+- receive alerts to avoid letting products spoil.  
+
+---
+
+## 📦 Core Functionality
+
+The core functionality of the system includes:  
+
+- **Adding food items** with key information such as:
+  - product name
+  - category (e.g., dairy, vegetables, meat)
+  - purchase and expiration dates
+  - quantity and unit of measurement  
+
+- **Dashboard** displaying all stored food, organized and sorted by expiration date.  
+  - Products close to expiry will be visually highlighted in red.  
+  - Users can filter the list by category, date, or product name for easy browsing.  
+
+- **Notifications and alerts** that warn users of soon-to-expire items.  
+  - Alerts can be visual within the app or delivered via email or push notifications.  
+
+- **Recipe suggestion feature** recommending simple dishes using ingredients about to expire, helping users make use of items before they go bad.  
+
+- **Waste statistics module** tracking:
+  - proportion of expired vs consumed products
+  - estimated economic loss due to waste
+  - insights into food usage habits  
+
+---
+
+## 💻 Technical Stack
+
+- **Frontend**: HTML and CSS  
+- **Backend**: Flask (Python)  
+- **Database**: SQLite  

@@ -44,9 +44,11 @@ To identify key personas and their activities, we defined the following user sto
 
 | Title                                    | Requirement                                                                                               | Acceptance Criteria                                  |
 |------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| Responsive User Interface               | The system shall provide a user-friendly and responsive interface accessible from desktop and mobile devices. | The UI displays correctly on common screen sizes.    |
-| Offline Data Storage  (????)            | The system shall store data locally using a lightweight database to ensure offline functionality.        | Users can use the core app features without internet.|
-| Reliable Notifications                  | Notifications (if implemented with Firebase) shall be sent in a timely and reliable manner.              | Notifications appear within 1 minute of expiry check.|
+| **Responsive User Interface**               | The system shall provide a user-friendly and responsive interface accessible from desktop and mobile devices. | The UI displays correctly on common screen sizes.    |
+| **Offline Data Storage  (????)**            | The system shall store data locally using a lightweight database to ensure offline functionality.        | Users can use the core app features without internet.|
+| **Reliable Notifications**                  | Notifications (if implemented with Firebase) shall be sent in a timely and reliable manner.              | Notifications appear within 1 minute of expiry check.|
+| **AI API Reliability**	|The system should handle failures or downtime of the external AI API gracefully.|	If the API is unavailable, the system shows a user-friendly error and falls back (e.g., no suggestions).|
+| **API Latency**	|The system should handle AI API responses within 3 seconds to avoid a poor user experience.|	The average API call response time must not exceed 3 seconds.|
 
 ---
 
@@ -57,6 +59,7 @@ To identify key personas and their activities, we defined the following user sto
 | **Backend Framework Constraint**         | The backend shall be implemented using Python with Flask.                                                  | Chosen due to team familiarity and lightweight deployment.                                        |
 | **Database and Cloud Services**          | The database shall use SQLite for local storage and Firebase for optional notification delivery.           | SQLite is lightweight for local use; Firebase allows easy cloud integration for notifications.   |
 | **Frontend Technology Stack**            | The frontend shall be developed using HTML and CSS (with optional JavaScript for interactivity).           | HTML/CSS ensures accessibility and simplicity; fits professor’s requirements for tech stack.     |
+| **External API Usage** | The system must integrate with a third-party AI API (e.g., Gemini, GPT, or similar), to implement recipe suggestions.| Developing an in-house recipe engine is outside the scope and requires massive domain knowledge and datasets. |
 
 ---
 

@@ -15,7 +15,44 @@ Ideally, the design should be the same, regardless of the technological choices 
 ## Architecture 
 
 - Which architectural style (e.g. layered, object-based, event-based, shared dataspace)? Why? Why not the others?
-- Provide details about the actual architecture (e.g. N-tier, hexagonal, etc.) you are going to adopt. Motivate your choice.
+
+### 📌 Actual Architecture
+
+The system adopts a **3-tier architecture**, which cleanly separates concerns into three layers:  
+
+---
+
+#### Presentation Layer (Frontend)
+- Technologies: **HTML, CSS**, and optionally **JavaScript** for interactivity.  
+- Role: Provides the user interface for adding, viewing, and managing food items.  
+- Responsibilities:
+  - Render food inventory with visual highlights for soon-to-expire items.
+  - Allow filtering and sorting by category, date, or product name.
+  - Display notifications and recipe suggestions.
+
+---
+
+#### Application Layer (Backend)
+- Technologies: **Flask (Python)**  
+- Role: Serves as a REST API that processes requests from the frontend.  
+- Responsibilities:
+  - Implements business logic for adding/updating/deleting food items.
+  - Checks expiration dates and generates notifications.
+  - Integrates with external AI API (Gemini) to fetch recipe suggestions.
+  - Calculates waste statistics and economic loss.
+
+---
+
+#### Data Layer (Persistence)
+- Technology: **SQLite database**  
+- Role: Stores all persistent data locally.  
+- Responsibilities:
+  - Manage food item records, including name, category, quantity, purchase/expiration dates.
+  - Track statistics of consumed vs. expired items.
+  - Store user preferences (if applicable).
+
+---
+
 - Provide a high-level overview of the architecture, possibly with a diagram
 - Describe the responsibilities of each architectural component
 

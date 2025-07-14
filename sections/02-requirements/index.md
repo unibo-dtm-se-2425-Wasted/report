@@ -8,7 +8,7 @@ nav_order: 3
 
 ## User stories
 
-- Write down [user stories](https://www.atlassian.com/agile/project-management/user-stories) to devise the main __personas__ (user roles) and the activities they will perform via the system to be developed.
+- Write down!!! [user stories](https://www.atlassian.com/agile/project-management/user-stories) to devise the main __personas__ (user roles) and the activities they will perform via the system to be developed.
 
 ## Requirements analysis
 

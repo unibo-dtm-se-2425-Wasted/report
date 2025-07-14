@@ -16,7 +16,7 @@ Ideally, the design should be the same, regardless of the technological choices 
 
 - Which architectural style (e.g. layered, object-based, event-based, shared dataspace)? Why? Why not the others?
 
-### 📌 Actual Architecture
+### Actual Architecture
 
 The system adopts a **3-tier architecture**, which cleanly separates concerns into three layers:  
 

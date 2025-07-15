@@ -137,7 +137,7 @@ This is a non-distributed system in its initial version.
 
 ### Activity Diagram (Food Expiry Notifications)
 
-![Component Diagram](activitydiagram.puml)
+![Component Diagram](activitydiagram.png)
 
 ---
 

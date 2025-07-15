@@ -1,0 +1,10 @@
+@startuml
+component Inventory
+component "Notification System" as NotificationSystem
+component "Waste Statistics" as WasteStatistics
+component "Recipe Suggestion Engine" as RecipeSuggestionEngine
+
+Inventory --> NotificationSystem
+Inventory --> WasteStatistics
+WasteStatistics --> RecipeSuggestionEngine
+@enduml

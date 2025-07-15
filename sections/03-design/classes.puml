@@ -1,0 +1,34 @@
+@startuml
+class FoodItem {
+  - id: int
+  - name: str
+  - category: str
+  - purchaseDate: date
+  - expiryDate: date
+  - quantity: float
+  - unit: str
+  + isExpired(): bool
+  + daysToExpiry(): int
+}
+
+class NotificationService {
+  + checkExpiryDates(): list
+  + sendNotification(): void
+}
+
+class RecipeService {
+  + fetchSuggestions(items: list): list
+}
+
+class StatisticsService {
+  + calculateWaste(): float
+  + calculateSavings(): float
+}
+
+class WasteRecord {
+  - itemId: int
+  - status: string
+  - cost: float
+  - date: date
+}
+@enduml

@@ -12,88 +12,188 @@ Ideally, the design should be the same, regardless of the technological choices 
 
 > You can re-order the sections as you prefer, but all the sections must be present in the end
 
-## Architecture 
+# Architectural Style
 
-- Which architectural style (e.g. layered, object-based, event-based, shared dataspace)? Why? Why not the others?
-- Provide details about the actual architecture (e.g. N-tier, hexagonal, etc.) you are going to adopt. Motivate your choice.
-- Provide a high-level overview of the architecture, possibly with a diagram
-- Describe the responsibilities of each architectural component
+## 3-Tier Architecture (Layered Architecture)
 
-> UML Components diagrams are welcome here
+### Why this style?
 
-## Infrastructure (mostly applies to distributed systems)
+- Clearly separates concerns: UI, business logic, and data persistence
+- Promotes maintainability and scalability
+- Easy to test and debug due to clear boundaries
 
-- Are there **infrastructural components** that need to be introduced? Which and **how many** of each?
-    - e.g. **clients**, **servers**, **load balancers**, **caches**, **databases**, **message brokers**, **queues**, **workers**, **proxies**, **firewalls**, **CDNs**, etc.
-- How do components **distribute** over the network? **Where** are they located?
-    - e.g. do servers / brokers / databases / etc. sit on the same machine? on the same network? on the same datacenter? on the same continent?
-- How do components **find** each other?
-    - How to **name** components?
-    - e.g. **DNS**, **service discovery**, **load balancing**, etc.
+![Component Diagram](component_diagram.puml)
 
-> UML deployment diagrams are welcome here
+---
 
-## Modelling
+# Infrastructure
 
-### Domain driven design (DDD) modelling
+This is a non-distributed system in its initial version.
 
-- Which are the bounded contexts of your domain? 
-- Which are domain concepts (entities, value objects, aggregates, etc.) for each context?
-- Are there repositories, services, or factories for each/any domain concept?
-- What are the relavant domain events in each context?
+- **Clients**: Web browsers on mobile, tablets, or desktop
+- **Server**: Flask web server running on a single machine (local or hosted)
+- **Database**: SQLite file on the same machine as the Flask backend
+- **External API**: Gemini (via HTTPS, for recipe suggestions)
 
-> Context map diagrams are welcome here
+---
 
-### Object-oriented modelling
+## Deployment Considerations
 
-- What are the main data types (e.g. classes) of the system?
-- What are the main attributes and methods of each data type?
-- How do data types relate to each other?
+- All components can be co-located on a single virtual server or container
+- In production:
+  - Flask should run behind a web server such as Nginx or Apache
+  - DNS can route users to the hosted Flask server (e.g., `wasted.app`)
 
-> UML class diagrams are welcome here
+---
 
-### In case of a distributed system
+# Modelling
 
-- How do the domain concepts map to the architectural or infrastuctural components?
-    + i.e. which architectural/component is responsible for which domain concept?
-    + are there data types which are required onto multiple components? (e.g. messages being exchanged between components)
+## Domain-Driven Design (DDD)
 
-- What are the domain concepts or data types which represent the state of the distributed system?
-    + e.g. state of a video game on central server, while inputs/representations on clients
-    + e.g. where to store messages in an instant-messaging app? for how long?
+### Bounded Contexts
 
-- Are there domain concepts or data types which represent messages being exchanged between components?
-    + e.g. messages between clients and servers, messages between servers, messages between clients
+- Inventory Management  
+- Notification System  
+- Waste Statistics  
+- Recipe Suggestion Engine
 
-## Interaction
+### Domain Concepts
 
-- How do components *communicate*? *When*? *What*?
+| Context             | Entity / Aggregate       | Description                                      |
+|---------------------|--------------------------|--------------------------------------------------|
+| Inventory           | `FoodItem`               | Represents a stored food item with all metadata |
+| Notification System | `NotificationPreference` | Stores if/when a user wants notifications       |
+| Waste Statistics    | `WasteRecord`            | Tracks expired vs consumed items                |
+| Recipe Suggestion   | `RecipeQuery / Recipe`   | Models interaction with external AI API         |
 
-- Which **interaction patterns** do they enact?
+### Repositories / Services
 
-> UML sequence diagrams are welcome here
+- `FoodItemRepository`: Handles CRUD operations  
+- `StatisticsService`: Computes waste statistics  
+- `NotificationService`: Triggers alert generation  
+- `RecipeService`: Communicates with the Gemini API
 
-## Behaviour
+### Domain Events
 
-- How does **each** component *behave* individually (e.g., in *response* to *events* or messages)?
-    + Some components may be *stateful*, others *stateless*
+- `FoodItemExpired`  
+- `FoodItemConsumed`  
+- `FoodItemAdded`  
+- `PreferencesUpdated`
 
-- Which components are in charge of updating the **state** of the system? *When*? *How*?
+---
 
-> UML state diagrams or activity diagrams are welcome here
+## Context Map
 
-## Data-related aspects (in case persistent storage is needed)
+![Component Diagram](context_map.puml)
 
-- Is there any data that needs to be stored?
-    - *What* data? *Where*? *Why*?
+---
 
-- How should **persistent data** be **stored**? Why?
-    - e.g., relations, documents, key-value, graph, etc.
+# Object-Oriented Modelling
 
-- Which components perform queries on the database?
-    - *When*? *Which* queries? *Why*?
-    - Concurrent read? Concurrent write? Why?
+## Main Classes and Attributes
 
-- Is there any data that needs to be shared between components?
-    - *Why*? *What* data?
+### Class Diagram (UML-style)
+
+![Component Diagram](classes.puml)
+
+---
+
+# Interaction
+
+## Component Communication
+
+### Frontend ↔ Backend (REST API)
+
+| Action               | HTTP Method | Endpoint               | Description                                |
+|----------------------|-------------|------------------------|--------------------------------------------|
+| Add Food Item        | POST        | `/api/items`           | Adds a new food item                       |
+| Get All Items        | GET         | `/api/items`           | Retrieves full inventory                   |
+| Get Expiring Items   | GET         | `/api/items/expiring`  | Returns soon-to-expire items               |
+| Get Recipe Suggestions | POST      | `/api/recipes`         | Sends ingredients, gets suggestions        |
+| Get Waste Statistics | GET         | `/api/statistics`      | Returns food waste data                    |
+
+### Sequence Diagram (Add Item)
+
+![Component Diagram](additem.puml)
+
+---
+
+# Behaviour
+
+## Component Behaviour Overview
+
+### Flask Backend
+
+- **Stateful**: Maintains application logic and interacts with the database
+- Updates state when:
+  - Food items are added, edited, or deleted
+  - Waste statistics are calculated
+  - Recipe API is queried
+
+### Frontend
+
+- **Stateless**, except for UI state or session data
+- Fetches and displays data via API
+
+### Activity Diagram (Food Expiry Notifications)
+
+![Component Diagram](activitydiagram.puml)
+
+---
+
+# Data-Related Aspects
+
+## Persistent Data
+
+### What is stored:
+
+- Food items: name, category, dates, quantity
+- Waste records: expired vs consumed
+- User preferences
+
+### Where:
+
+- Stored in **SQLite** (local file-based DB)
+
+### Why:
+
+- Ensures persistence across sessions and device restarts
+
+---
+
+## Storage Type
+
+- **Relational Database (SQLite)**  
+- Simple schema, structured data, suited for local deployment
+
+### Tables:
+
+- `food_items`
+- `waste_stats`
+- `user_preferences`
+
+---
+
+## Data Queries
+
+- All database access is handled by the backend:
+  - `SELECT` for filters, dashboards, and statistics
+  - `INSERT`, `DELETE`, `UPDATE` for food lifecycle management
+  - `JOIN` for waste tracking if schema is normalized
+
+---
+
+## Concurrency Considerations
+
+- SQLite + single-threaded Flask = minimal concurrency issues
+- For multi-user support: consider Flask + PostgreSQL and multithreading
+
+---
+
+## Data Sharing
+
+- Shared between:
+  - Backend and frontend (via API responses)
+  - Backend and AI API (for recipe suggestions)
+- Not shared among users (single-user system)
 

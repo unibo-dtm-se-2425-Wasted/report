@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+
+skinparam class {
+  BackgroundColor<<FoodItem>> #FFEECC
+  BorderColor<<FoodItem>> #CC8800
+  
+  BackgroundColor<<WasteRecord>> #DDEEFF
+  BorderColor<<WasteRecord>> #3366CC
+  
+  BackgroundColor<<NotificationService>> #EEFFDD
+  BorderColor<<NotificationService>> #66AA33
+  
+  BackgroundColor<<RecipeService>> #FFDDDD
+  BorderColor<<RecipeService>> #CC3333
+  
+  BackgroundColor<<StatisticsService>> #F0F0F0
+  BorderColor<<StatisticsService>> #999999
+}
+
+' Rendi invisibili le linee tratteggiate usate per l’allineamento
+skinparam {
+  SequenceLifeLineBorderColor transparent
+  ArrowColor transparent
+  ArrowFontColor transparent
+  EdgeColor transparent
+}
+
+class FoodItem <<FoodItem>> {
+  - name: str
+  - category: str
+  - purchaseDate: date
+  - expiryDate: date
+  - quantity: float
+  - unit: str
+  - price: float
+  --
+  + daysToExpiry(): int
+  + isExpired(): bool
+}
+
+class WasteRecord <<WasteRecord>> {
+  - itemName: str
+  - isExpired: string  ' Present only if "yes"
+  - itemPrice: float
+  - date: date
+}
+
+class NotificationService <<NotificationService>> {
+  + checkExpiryDates(): list
+  + sendNotification(): void
+}
+
+class RecipeService <<RecipeService>> {
+  + fetchSuggestions(items: list): list
+}
+
+class StatisticsService <<StatisticsService>> {
+  + calculateWaste(): float
+  + calculateSavings(): float
+}
+
+' Associazioni invisibili per allineare le classi orizzontalmente
+FoodItem .. WasteRecord
+WasteRecord .. NotificationService
+NotificationService .. RecipeService
+RecipeService .. StatisticsService
+
+@enduml
+
+
+

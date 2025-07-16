@@ -22,7 +22,36 @@ Ideally, the design should be the same, regardless of the technological choices 
 - Promotes maintainability and scalability
 - Easy to test and debug due to clear boundaries
 
-![Component Diagram](component_diagram.puml)
+# Actual Architecture
+
+The system uses a **3-tier architecture**:
+
+---
+
+## 1. Presentation Layer (Frontend)
+- **Technologies**: HTML, CSS, JavaScript *(optional for interactivity)*.
+- **Responsibility**: Provides UI for user interactions.
+
+---
+
+## 2. Application Layer (Backend)
+- **Framework**: Flask REST API serves requests from the frontend.
+- **Responsibility**: Handles business logic such as:
+  - Tracking food
+  - Filtering
+  - Notifications
+
+---
+
+## 3. Data Layer (Persistence)
+- **Database**: SQLite
+- **Responsibility**: Local storage of:
+  - Food items
+  - Expiration dates
+  - User statistics
+
+
+![Component Diagram](component_diagram.png)
 
 ---
 
@@ -77,14 +106,11 @@ This is a non-distributed system in its initial version.
 
 - `FoodItemExpired`  
 - `FoodItemConsumed`  
-- `FoodItemAdded`  
-- `PreferencesUpdated`
+- `FoodItemAdded` 
+- `WasteScaleUpdated` 
 
 ---
 
-## Context Map
-
-![Component Diagram](context_map.puml)
 
 ---
 
@@ -94,8 +120,8 @@ This is a non-distributed system in its initial version.
 
 ### Class Diagram (UML-style)
 
-![Component Diagram](classes.puml)
-
+![Component Diagram](classes3.png)
+![Component Diagram](classes2.png)
 ---
 
 # Interaction
@@ -104,17 +130,19 @@ This is a non-distributed system in its initial version.
 
 ### Frontend ↔ Backend (REST API)
 
-| Action               | HTTP Method | Endpoint               | Description                                |
-|----------------------|-------------|------------------------|--------------------------------------------|
-| Add Food Item        | POST        | `/api/items`           | Adds a new food item                       |
-| Get All Items        | GET         | `/api/items`           | Retrieves full inventory                   |
-| Get Expiring Items   | GET         | `/api/items/expiring`  | Returns soon-to-expire items               |
-| Get Recipe Suggestions | POST      | `/api/recipes`         | Sends ingredients, gets suggestions        |
-| Get Waste Statistics | GET         | `/api/statistics`      | Returns food waste data                    |
+| Action                 | HTTP Method | Endpoint               | Description                                 |
+|------------------------|-------------|------------------------|---------------------------------------------|
+| Add Food Item          | POST        | `/api/items`           | Adds a new food item to the inventory       |
+| Get Items              | GET         | `/api/items`           | Retrieves the inventory list                |
+| Get Expiring Items     | GET         | `/api/items/expiring`  | Retrieves items that are expiring soon      |
+| Delete Food Item       | DELETE      | `/api/items/{id}`      | Deletes a food item by its ID               |
+| Get Recipe Suggestions | POST        | `/api/recipes`         | Sends ingredients to get recipe suggestions |
+| Get Waste Statistics   | GET         | `/api/statistics`      | Retrieves food waste statistics             |
+
 
 ### Sequence Diagram (Add Item)
 
-![Component Diagram](additem.puml)
+![Component Diagram](sequence2.png)
 
 ---
 
@@ -135,10 +163,10 @@ This is a non-distributed system in its initial version.
 - **Stateless**, except for UI state or session data
 - Fetches and displays data via API
 
-### Activity Diagram (Food Expiry Notifications)
+### Activity Diagram 
 
-![Component Diagram](activitydiagram.png)
-
+![Component Diagram](checkexpireditems.png)
+![Component Diagram](consumeditem.png)
 ---
 
 # Data-Related Aspects
@@ -170,7 +198,7 @@ This is a non-distributed system in its initial version.
 
 - `food_items`
 - `waste_stats`
-- `user_preferences`
+
 
 ---
 
@@ -186,7 +214,7 @@ This is a non-distributed system in its initial version.
 ## Concurrency Considerations
 
 - SQLite + single-threaded Flask = minimal concurrency issues
-- For multi-user support: consider Flask + PostgreSQL and multithreading
+
 
 ---
 

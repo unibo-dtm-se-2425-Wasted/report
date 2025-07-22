@@ -37,4 +37,4 @@ The application aims to support users in managing food items at home to reduce w
 
 For the initial development phase, only **one role** is foreseen:
 
-* **Standard Household User:** This role encompasses all food management functionalities (adding, viewing, filtering), receiving notifications, recipe suggestions, and accessing personal waste statistics..
+* **Standard Household User:** This role encompasses all food management functionalities (adding, viewing, filtering), receiving notifications, recipe suggestions, and accessing personal waste statistics.

@@ -6,11 +6,9 @@ nav_order: 4
 
 # Design
 
-This chapter explains the strategies used to meet the requirements identified in the analysis. 
+This chapter explains the strategies used to meet the requirements identified in the analysis.
 
-Ideally, the design should be the same, regardless of the technological choices made during the implementation phase.
-
-> You can re-order the sections as you prefer, but all the sections must be present in the end
+The design focuses on clear separation of concerns while reflecting the current technological choices (Streamlit frontend + integrated backend).
 
 # Architectural Style
 
@@ -29,22 +27,23 @@ The system uses a **3-tier architecture**:
 ---
 
 ## 1. Presentation Layer (Frontend)
-- **Technologies**: HTML, CSS, JavaScript *(optional for interactivity)*.
-- **Responsibility**: Provides UI for user interactions.
-
+- **Technologies**: Streamlit (Python-based UI components) .
+- **Responsibility**: Provides UI for user interactions directly within Streamlit.
+- Includes dashboard, food item display, filtering, and statistics.
 ---
 
 ## 2. Application Layer (Backend)
-- **Framework**: Flask REST API serves requests from the frontend.
+- **Technology:** Python integrated with Streamlit
 - **Responsibility**: Handles business logic such as:
   - Tracking food
   - Filtering
-  - Notifications
+  - Waste statistics calculation
+  - Recipe suggestions via Spoonacular API
 
 ---
 
 ## 3. Data Layer (Persistence)
-- **Database**: SQLite
+- **Database**: SQLite local file
 - **Responsibility**: Local storage of:
   - Food items
   - Expiration dates
@@ -59,19 +58,18 @@ The system uses a **3-tier architecture**:
 
 This is a non-distributed system in its initial version.
 
-- **Clients**: Web browsers on mobile, tablets, or desktop
-- **Server**: Flask web server running on a single machine (local or hosted)
-- **Database**: SQLite file on the same machine as the Flask backend
-- **External API**: Gemini (via HTTPS, for recipe suggestions)
+- **Clients**: Streamlit app accessed on desktop, tablet, or mobile.
+- **Server**: Integrated in Streamlit (local or deployed container).
+- **Database**: SQLite file on the same machine as the Streamlit app.
+- **External API**: Spoonacular (via HTTPS, for recipe suggestions)
 
 ---
 
 ## Deployment Considerations
 
-- All components can be co-located on a single virtual server or container
-- In production:
-  - Flask should run behind a web server such as Nginx or Apache
-  - DNS can route users to the hosted Flask server (e.g., `wasted.app`)
+- All components co-located in a single app instance.
+- Streamlit handles serving the application without a separate web server.
+- Offline mode supported via local SQLite database.
 
 ---
 
@@ -81,8 +79,7 @@ This is a non-distributed system in its initial version.
 
 ### Bounded Contexts
 
-- Inventory Management  
-- Notification System  
+- Inventory Management    
 - Waste Statistics  
 - Recipe Suggestion Engine
 
@@ -91,15 +88,13 @@ This is a non-distributed system in its initial version.
 | Context             | Entity / Aggregate       | Description                                      |
 |---------------------|--------------------------|--------------------------------------------------|
 | Inventory           | `FoodItem`               | Represents a stored food item with all metadata |
-| Notification System | `NotificationPreference` | Stores if/when a user wants notifications       |
 | Waste Statistics    | `WasteRecord`            | Tracks expired vs consumed items                |
 | Recipe Suggestion   | `RecipeQuery / Recipe`   | Models interaction with external AI API         |
 
 ### Repositories / Services
 
 - `FoodItemRepository`: Handles CRUD operations  
-- `StatisticsService`: Computes waste statistics  
-- `NotificationService`: Triggers alert generation  
+- `StatisticsService`: Computes waste statistics   
 - `RecipeService`: Communicates with the Gemini API
 
 ### Domain Events
@@ -120,7 +115,6 @@ This is a non-distributed system in its initial version.
 
 ### Class Diagram (UML-style)
 
-![Component Diagram](classes3.png)
 ![Component Diagram](classes2.png)
 ---
 
@@ -128,7 +122,7 @@ This is a non-distributed system in its initial version.
 
 ## Component Communication
 
-### Frontend ↔ Backend (REST API)
+### Frontend ↔ Backend integrated in Streamlit
 
 | Action                 | HTTP Method | Endpoint               | Description                                 |
 |------------------------|-------------|------------------------|---------------------------------------------|
@@ -204,7 +198,7 @@ This is a non-distributed system in its initial version.
 
 ## Data Queries
 
-- All database access is handled by the backend:
+- All database access is handled internally via Python/SQLite:
   - `SELECT` for filters, dashboards, and statistics
   - `INSERT`, `DELETE`, `UPDATE` for food lifecycle management
   - `JOIN` for waste tracking if schema is normalized
@@ -213,7 +207,7 @@ This is a non-distributed system in its initial version.
 
 ## Concurrency Considerations
 
-- SQLite + single-threaded Flask = minimal concurrency issues
+- Single-user Streamlit app + SQLite → minimal concurrency issues
 
 
 ---

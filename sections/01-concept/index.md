@@ -4,17 +4,17 @@ has_children: false
 nav_order: 2
 ---
 
-# Project Concept: "Smart Fridge & Pantry Management"
+# Project concept: "smart fridge & pantry management"
 
 ---
 
-### Type of Product Developed
+### Type of product developed
 
 This project involves the development of a **Web Application with a GUI** (Graphical User Interface). It will be accessible via a web browser on any internet-connected device.
 
 ---
 
-### Use Cases
+### Use cases
 
 The application aims to support users in managing food items at home to reduce waste.
 
@@ -28,7 +28,6 @@ The application aims to support users in managing food items at home to reduce w
     * **Data stored:**
         * Information about **food items**: product name, category (e.g., dairy, vegetables, meat), purchase and expiration dates, quantity, unit of measurement.
         * Data related to **waste statistics**: proportion of expired versus consumed products, estimated economic loss due to waste.
-        * Any **user preferences** for notifications.
     * **Where:** This data will be stored in a **SQLite database**, managed by the Sreamlit backend logic.
 
 ---
@@ -37,4 +36,4 @@ The application aims to support users in managing food items at home to reduce w
 
 For the initial development phase, only **one role** is foreseen:
 
-* **Standard Household User:** This role encompasses all food management functionalities (adding, viewing, filtering), receiving notifications, recipe suggestions, and accessing personal waste statistics..
+* **Standard Household User:** This role encompasses all food management functionalities (adding, viewing, filtering), receiving in-app alerts, recipe suggestions, and accessing personal waste statistics.

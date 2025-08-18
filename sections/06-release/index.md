@@ -8,26 +8,26 @@ nav_order: 7
 
 From the project’s codebase, the following artefacts are generated:
 
-1. **Python Package**
+1. **Python package**
    - `food_waste_manager-X.Y.Z.tar.gz` → **Source Distribution (sdist)** containing raw source code and metadata.
    - `food_waste_manager-X.Y.Z-py3-none-any.whl` → **Wheel (binary distribution)**, pre-built for faster installation.
    - Both artefacts include the Streamlit app and Python modules (`app.py`, `db/database.py`, tests).
 
-2. **Docker Image** (`ghcr.io/<org>/food-waste-manager:X.Y.Z`)
+2. **Docker image** (`ghcr.io/<org>/food-waste-manager:X.Y.Z`)
    - Contains the Streamlit app fully packaged and ready to run in a container.
    - Suitable for deployment to servers, cloud environments, or orchestration platforms (e.g., Kubernetes).
 
-# Publishing Repositories
+# Publishing repositories
 - **PyPI** (public or private) for the Python package.  
   *Reason:* Easy installation via `pip`.
 
 - **Docker Hub** or **GitHub Container Registry (GHCR)** for the Docker image.  
   *Reason:* Rapid deployment without local Python configuration.
 
-# Release Process
+# Release process
 Releases are automated with **GitHub Actions**.
 
-# General Configuration
+# General configuration
 1. Create `.github/workflows/release.yml`.
 2. Trigger the workflow on **tag push** (`vX.Y.Z`) in GitHub.
 3. Workflow steps:
@@ -37,7 +37,7 @@ Releases are automated with **GitHub Actions**.
    - Build Docker image (`docker build`).
    - Push Docker image to Docker Hub or GHCR (`docker push`).
 
-# Manual Release Commands
+# Manual release commands
 ```bash
 # 1. Update version in pyproject.toml or setup.py
 # 2. Build Python package
@@ -52,7 +52,7 @@ docker push ghcr.io/<org>/food-waste-manager:X.Y.Z
 ```
 
 # Choice of the license
-# Code License
+# Code license
 We have chosen the **MIT License** for the project’s source code.
 
 **Reasons:**
@@ -63,7 +63,7 @@ We have chosen the **MIT License** for the project’s source code.
 
 ---
 
-# Artefacts License
+# Artefacts license
 The produced artefacts (Python package and Docker image) are also released under the **MIT License**.
 
 **Reasons:**
@@ -81,7 +81,7 @@ We use **Semantic Versioning (SemVer)**: `MAJOR.MINOR.PATCH`
 
 ---
 
-# Multiple Artefacts
+# Multiple artefacts
 
 All artefacts share the same version number:
 
@@ -90,7 +90,7 @@ All artefacts share the same version number:
 
 ---
 
-# Creating a New Version
+# Creating a new version
 
 1. **Update the version** in `pyproject.toml` or `setup.py`.
 

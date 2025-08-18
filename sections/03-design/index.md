@@ -10,9 +10,9 @@ This chapter explains the strategies used to meet the requirements identified in
 
 The design focuses on clear separation of concerns while reflecting the current technological choices (Streamlit frontend + integrated backend).
 
-# Architectural Style
+# Architectural style
 
-## 3-Tier Architecture (Layered Architecture)
+## 3-tier architecture (layered architecture)
 
 ### Why this style?
 
@@ -20,19 +20,19 @@ The design focuses on clear separation of concerns while reflecting the current 
 - Promotes maintainability and scalability
 - Easy to test and debug due to clear boundaries
 
-# Actual Architecture
+# Actual architecture
 
 The system uses a **3-tier architecture**:
 
 ---
 
-## 1. Presentation Layer (Frontend)
+## 1. Presentation layer (frontend)
 - **Technologies**: Streamlit (Python-based UI components) .
 - **Responsibility**: Provides UI for user interactions directly within Streamlit.
 - Includes dashboard, food item display, filtering, and statistics.
 ---
 
-## 2. Application Layer (Backend)
+## 2. Application layer (backend)
 - **Technology:** Python integrated with Streamlit
 - **Responsibility**: Handles business logic such as:
   - Tracking food
@@ -42,7 +42,7 @@ The system uses a **3-tier architecture**:
 
 ---
 
-## 3. Data Layer (Persistence)
+## 3. Data layer (persistence)
 - **Database**: SQLite local file
 - **Responsibility**: Local storage of:
   - Food items
@@ -65,7 +65,7 @@ This is a non-distributed system in its initial version.
 
 ---
 
-## Deployment Considerations
+## Deployment considerations
 
 - All components co-located in a single app instance.
 - Streamlit handles serving the application without a separate web server.
@@ -77,13 +77,13 @@ This is a non-distributed system in its initial version.
 
 ## Domain-Driven Design (DDD)
 
-### Bounded Contexts
+### Bounded contexts
 
-- Inventory Management    
-- Waste Statistics  
-- Recipe Suggestion Engine
+- Inventory management    
+- Waste statistics  
+- Recipe suggestion Engine
 
-### Domain Concepts
+### Domain concepts
 
 | Context             | Entity / Aggregate       | Description                                      |
 |---------------------|--------------------------|--------------------------------------------------|
@@ -97,7 +97,7 @@ This is a non-distributed system in its initial version.
 - `StatisticsService`: Computes waste statistics   
 - `RecipeService`: Communicates with the Gemini API
 
-### Domain Events
+### Domain events
 
 - `FoodItemExpired`  
 - `FoodItemConsumed`  
@@ -109,11 +109,11 @@ This is a non-distributed system in its initial version.
 
 ---
 
-# Object-Oriented Modelling
+# Object-oriented modelling
 
-## Main Classes and Attributes
+## Main classes and attributes
 
-### Class Diagram (UML-style)
+### Class diagram (UML-style)
 
 ![Component Diagram](classes2.png)
 ---
@@ -126,15 +126,15 @@ This is a non-distributed system in its initial version.
 
 | Action                 | HTTP Method | Endpoint               | Description                                 |
 |------------------------|-------------|------------------------|---------------------------------------------|
-| Add Food Item          | POST        | `/api/items`           | Adds a new food item to the inventory       |
-| Get Items              | GET         | `/api/items`           | Retrieves the inventory list                |
-| Get Expiring Items     | GET         | `/api/items/expiring`  | Retrieves items that are expiring soon      |
-| Delete Food Item       | DELETE      | `/api/items/{id}`      | Deletes a food item by its ID               |
-| Get Recipe Suggestions | POST        | `/api/recipes`         | Sends ingredients to get recipe suggestions |
-| Get Waste Statistics   | GET         | `/api/statistics`      | Retrieves food waste statistics             |
+| Add food item          | POST        | `/api/items`           | Adds a new food item to the inventory       |
+| Get items              | GET         | `/api/items`           | Retrieves the inventory list                |
+| Get expiring items     | GET         | `/api/items/expiring`  | Retrieves items that are expiring soon      |
+| Delete food item       | DELETE      | `/api/items/{id}`      | Deletes a food item by its ID               |
+| Get recipe suggestions | POST        | `/api/recipes`         | Sends ingredients to get recipe suggestions |
+| Get waste statistics   | GET         | `/api/statistics`      | Retrieves food waste statistics             |
 
 
-### Sequence Diagram (Add Item)
+### Sequence diagram (Add item)
 
 ![Component Diagram](sequence2.png)
 
@@ -142,9 +142,9 @@ This is a non-distributed system in its initial version.
 
 # Behaviour
 
-## Component Behaviour Overview
+## Component behaviour overview
 
-### Flask Backend
+# Backend
 
 - **Stateful**: Maintains application logic and interacts with the database
 - Updates state when:
@@ -152,26 +152,24 @@ This is a non-distributed system in its initial version.
   - Waste statistics are calculated
   - Recipe API is queried
 
-### Frontend
+# Frontend
 
 - **Stateless**, except for UI state or session data
 - Fetches and displays data via API
 
-### Activity Diagram 
+# Activity Diagram 
 
 ![Component Diagram](checkexpireditems.png)
-![Component Diagram](consumeditem.png)
 ---
 
-# Data-Related Aspects
+# Data-related aspects
 
-## Persistent Data
+# Persistent data
 
-### What is stored:
+# What is stored:
 
 - Food items: name, category, dates, quantity
 - Waste records: expired vs consumed
-- User preferences
 
 ### Where:
 
@@ -183,36 +181,33 @@ This is a non-distributed system in its initial version.
 
 ---
 
-## Storage Type
+# Storage type
 
 - **Relational Database (SQLite)**  
 - Simple schema, structured data, suited for local deployment
 
-### Tables:
+# Tables:
 
 - `food_items`
-- `waste_stats`
-
-
 ---
 
-## Data Queries
+# Data queries
 
 - All database access is handled internally via Python/SQLite:
+  - `CREATE` for adding tables
   - `SELECT` for filters, dashboards, and statistics
-  - `INSERT`, `DELETE`, `UPDATE` for food lifecycle management
+  - `INSERT`, `DELETE`, for food lifecycle management
   - `JOIN` for waste tracking if schema is normalized
 
 ---
 
-## Concurrency Considerations
+# Concurrency considerations
 
 - Single-user Streamlit app + SQLite → minimal concurrency issues
 
-
 ---
 
-## Data Sharing
+## Data sharing
 
 - Shared between:
   - Backend and frontend (via API responses)

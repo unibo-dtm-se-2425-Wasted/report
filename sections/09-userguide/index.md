@@ -4,9 +4,9 @@ has_children: false
 nav_order: 10
 ---
 
-# User Guide
+# User guide
 
-# Launching the Application
+# Launching the application
 To run the web application, execute the following command:
 
 On Mac/Linux:
@@ -24,7 +24,7 @@ streamlit run my_project/app.py
 ```
 This will start the Streamlit server and automatically open the application in the browser.
 
-# User Interface and Features
+# User interface and features
 ![Interface](homepage.png)
 When the application loads, the user is presented with a sidebar menu that serves as the main input panel. From here, the user can:
 - Enter the food name (e.g., "Milk", "Carrots", "Chicken breast")
@@ -40,13 +40,13 @@ All added food items are automatically displayed in a persistent list on the hom
 The sidebar also includes a filtering function that allows users to quickly view only the foods that match their expiry status of interest (e.g., show only “expiring soon” items).
 ![Filter](filter.png)
 
-# Smart Cooking Suggestions
+# Smart cooking suggestions
 Further down the sidebar, users will find the “What can I cook today?” button.
 This feature is integrated with the Spoonacular API and automatically generates recipe suggestions based on the items in the fridge, prioritizing foods that are near expiration.
 This not only helps reduce waste but also provides inspiration for meal planning directly within the application.
 ![Meal inspiration](mealinspiration.png)
 
-# Data Visualization and Insights
+# Data visualization and insights
 At the bottom of the interface, the application presents a set of statistics and visual insights, which include:
 - The number of items currently fresh, expiring soon, or already expired
 - The percentage of food waste relative to the total

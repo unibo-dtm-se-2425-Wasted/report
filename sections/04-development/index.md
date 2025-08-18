@@ -11,7 +11,7 @@ nav_order: 5
 The code was developed using a Distributed Version Control System (DVCS), specifically Git.  
 This enabled the team to track changes in the repository in a collaborative and granular way, ensuring that each contribution was clearly documented. 
 
-**Branching Conventions:**  
+**Branching conventions:**  
 The project followed a branch-based workflow inspired by Git Flow.  
 A `main` branch was used for stable, production-ready code, while new features and improvements were implemented in dedicated branches, one for each group member.  
 Once completed and tested, these branches were merged into `main` after a code review process.
@@ -27,7 +27,7 @@ At the end of the development cycle, all modules were reviewed together to ensur
 ## Implementation details
 
 During development, we deepened our knowledge of Streamlit as a framework for creating interactive web applications directly in Python.  
-We also integrated Plotly Express for dynamic data visualization, improving the presentation of food status statistics.  
+We also integrated Plotly and Pandas for dynamic data visualization, improving the presentation of food status statistics.  
 Another relevant learning point was interacting with an external API (Spoonacular) to provide real-time recipe suggestions based on items nearing expiration.  
 This experience improved our understanding of HTTP requests with the `requests` library, handling JSON responses, and integrating third-party data sources seamlessly.  
   

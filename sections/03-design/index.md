@@ -14,8 +14,6 @@ The design focuses on clear separation of concerns while reflecting the current 
 
 ## 3-tier architecture (layered architecture)
 
-### Why this style?
-
 - Clearly separates concerns: UI, business logic, and data persistence
 - Promotes maintainability and scalability
 - Easy to test and debug due to clear boundaries

@@ -10,7 +10,6 @@ nav_order: 3
 
 To identify key personas and their activities, we defined the following user stories:
 
-### Persona 1: Michela (health and environmentally - conscious student)
 - *As a student with limited budget, I want notifications for expiring items, so I can avoid unnecessary waste.*
 - *As a health-conscious person, I want to filter my pantry by food category (vegetables, meat, etc.), so I can check what I still have before shopping.*
 - *As an environmentally-conscious user, I want to see statistics about how much food I wasted or saved, so I can improve my habits.*
@@ -63,8 +62,6 @@ To identify key personas and their activities, we defined the following user sto
 
 ### Glossary
 
-| Term                 | Definition                                                                                     |
-|----------------------|-------------------------------------------------------------------------------------------------|
 | **Food item**        | A product stored by the user, with metadata (name, category, dates, quantity, unit).           |
 | **Dashboard**        | The main screen where all stored food items are listed and managed.                            |
 | **Soon-to-expire**   | A food item that will expire within a pre-defined time window (3 days).                  |

@@ -13,9 +13,6 @@ This section explains how can a new person enter the development team and start 
 - report any relevant information about the development workflow (e.g. how to create a new feature branch, how to create a pull request, etc.)
 - report any relevant information about the development tools (e.g. how to configure the IDE, how to use the command line, etc.)
 
-Perfect 👍 For your **Developer Guide** section, here’s a structured draft you can insert into the report. It’s professional but also simple enough for a student project.
-
----
 
 ## Developer Guide
 

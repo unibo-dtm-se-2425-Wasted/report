@@ -48,7 +48,7 @@ The system uses a **3-tier architecture**:
   - User statistics
 
 
-![Component Diagram](component_diagram.png)
+![Component Diagram](componentdiagram.png)
 
 ---
 
@@ -104,16 +104,12 @@ This is a non-distributed system in its initial version.
 
 ---
 
-
----
-
-# Object-oriented modelling
-
+# Object-oriented modelling (conceptual)
+The class diagram shown here is conceptual and represents the logical organization of the system according to an OOP model.
+The actual code is written in a functional style, using functions and Pandas DataFrames, without formal Python classes.
 ## Main classes and attributes
 
-### Class diagram (UML-style)
-
-![Component Diagram](classes2.png)
+![Class Diagram](classdiagram.png)
 ---
 
 # Interaction
@@ -122,19 +118,20 @@ This is a non-distributed system in its initial version.
 
 ### Frontend ↔ Backend integrated in Streamlit
 
-| Action                 | HTTP Method | Endpoint               | Description                                 |
-|------------------------|-------------|------------------------|---------------------------------------------|
-| Add food item          | POST        | `/api/items`           | Adds a new food item to the inventory       |
-| Get items              | GET         | `/api/items`           | Retrieves the inventory list                |
-| Get expiring items     | GET         | `/api/items/expiring`  | Retrieves items that are expiring soon      |
-| Delete food item       | DELETE      | `/api/items/{id}`      | Deletes a food item by its ID               |
-| Get recipe suggestions | POST        | `/api/recipes`         | Sends ingredients to get recipe suggestions |
-| Get waste statistics   | GET         | `/api/statistics`      | Retrieves food waste statistics             |
+| Action                 | Function / Method Called           | Description                                                      |
+|------------------------|----------------------------------|------------------------------------------------------------------|
+| User login             | `check_user_credentials(username, password)` | Verifies user credentials and starts a session if valid          |
+| Add food item          | `insert_food_item(...)`           | Adds a new food item to the inventory                            |
+| Get all items          | `get_all_food_items(user)`        | Retrieves the inventory list                                     |
+| Get expiring items     | `check_status(expiration_date)` + filter | Retrieves items that are expiring soon                            |
+| Delete food item       | `delete_food_item(item_id, user)`| Deletes a food item by its ID                                     |
+| Get recipe suggestions | Logic inside "What Can I Cook Today?" button | Sends ingredients to Spoonacular API to get recipe suggestions   |
+| Get waste statistics   | `calculate_statistics(df)`        | Computes statistics on expired vs OK items                        |
 
 
 ### Sequence diagram (Add item)
 
-![Component Diagram](sequence2.png)
+![Sequence Diagram](sequencediagram.png)
 
 ---
 
@@ -155,10 +152,6 @@ This is a non-distributed system in its initial version.
 - **Stateless**, except for UI state or session data
 - Fetches and displays data via API
 
-# Activity Diagram 
-
-![Component Diagram](checkexpireditems.png)
----
 
 # Data-related aspects
 
@@ -169,11 +162,11 @@ This is a non-distributed system in its initial version.
 - Food items: name, category, dates, quantity
 - Waste records: expired vs consumed
 
-### Where:
+# Where:
 
 - Stored in **SQLite** (local file-based DB)
 
-### Why:
+# Why:
 
 - Ensures persistence across sessions and device restarts
 

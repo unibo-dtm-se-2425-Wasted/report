@@ -9,20 +9,28 @@ nav_order: 10
 # Launching the application
 To run the web application, execute the following command:
 
-On Mac/Linux:
-
 ```bash
-Copia
-Modifica
-PYTHONPATH=. streamlit run my_project/app.py
-```
-On Windows:
-
-```bash
-$env:PYTHONPATH="."
-streamlit run my_project/app.py
+streamlit run app.py
 ```
 This will start the Streamlit server and automatically open the application in the browser.
+
+# Deployed version
+
+The application has also been deployed using Streamlit Cloud, so it can be accessed directly via a web link without running it locally.
+Users can simply open the link in any browser to use the app.
+[text](https://wastedapp.streamlit.app//)
+
+# Login
+When opening the application, the user is first presented with the **Sign Up / Login page**.
+
+![Interface](login.png)
+
+- **Sign Up:**  
+  A new user must create an account by choosing a username and password.  
+ 
+- **Login:**  
+  Once registered, the user can log in with the chosen username and password. 
+
 
 # User interface and features
 ![Interface](homepage.png)
@@ -31,20 +39,22 @@ When the application loads, the user is presented with a sidebar menu that serve
 - Select the category of the item (fruit, meat, vegetables, dairy products, etc.)
 - Provide the purchase date and expiry date, ensuring accurate tracking of freshness
 - Indicate the quantity together with the correct unit of measure (e.g., grams, liters, pieces)
+- Provide the price for buying that item
 
-All added food items are automatically displayed in a persistent list on the home page. This list is continuously updated and sorted into three main categories:
+All added food items are automatically displayed in a persistent list on the home page. This list is continuously updated and sorted into three main status:
 - ✅ OK – items still fresh and safe to consume
 - ⏳ Expiring soon – items close to their expiry date, highlighted to encourage timely consumption
 - ❌ Expired – items that have already passed their expiry date
 
 The sidebar also includes a filtering function that allows users to quickly view only the foods that match their expiry status of interest (e.g., show only “expiring soon” items).
+
 ![Filter](filter.png)
 
 # Smart cooking suggestions
 Further down the sidebar, users will find the “What can I cook today?” button.
 This feature is integrated with the Spoonacular API and automatically generates recipe suggestions based on the items in the fridge, prioritizing foods that are near expiration.
 This not only helps reduce waste but also provides inspiration for meal planning directly within the application.
-![Meal inspiration](mealinspiration.png)
+![Meal inspiration](recipe.png)
 
 # Data visualization and insights
 At the bottom of the interface, the application presents a set of statistics and visual insights, which include:

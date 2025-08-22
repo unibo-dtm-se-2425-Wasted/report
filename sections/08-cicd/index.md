@@ -46,3 +46,4 @@ The purpose of the workflow is to ensure that the system remains stable and corr
 
 - The CI workflow is active and working: contributors receive email notifications when the workflow completes.  
 - The workflow ensures that all code merged into the repository passes the test suite, thus increasing the reliability of the system.  
+

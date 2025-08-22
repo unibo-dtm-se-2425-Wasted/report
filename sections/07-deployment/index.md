@@ -8,19 +8,41 @@ nav_order: 8
 
 This section explains what operations are needed to make the software work on the users' machine(s)
 
-## User installation
+# User installation
 
-- Does the user need to install something on their machine(s) to run your software?
-    * If yes, what is it?
-    * If yes, how to install it? (report the commands to run)
-    * If yes, how to configure it? (e.g. creating configuration files, setting environment variables, etc.)
+Users need Python and optionally Docker if they want to run the software in a container.
 
-## Server-side installation
+- **What is it?**  
+  1. Python 3.9+  
+  2. pip (Python package installer)  
+  3. Optional: Docker and Docker Compose
 
-- Does your software need to be installed on a server?
-    * If yes, what is it?
-    * If yes, how to install it?
-    * If yes, how to configure it?
+- **How to install it?**  
 
-- Does your software need to further software to be installed on the server? (e.g. a database, a message broker, etc.)
-    * same questions as above
+  **Python and pip:**
+  ```bash
+  # On Ubuntu/Debian
+  sudo apt update
+  sudo apt install python3 python3-pip
+
+  # On MacOS (using Homebrew)
+  brew install python3
+  ```
+
+
+## Instructions
+
+# 1st Step: clone the repository
+```bash
+git clone https://github.com/<org>/food-waste-manager.git
+cd food-waste-manager
+```
+
+# 2nd step: run the Streamlit app:
+```bash
+streamlit run app.py
+```
+
+# Server-side installation
+
+The application uses SQLite for local storage. SQLite is included with Python by default, so no additional database installation is required. The database file will be created automatically when the application runs, making setup simple and straightforward.

@@ -62,8 +62,6 @@ All artefacts share the same version number:
 
 # Creating a new version
 
-# Creating a new version
-
 1. **Update the version** in `pyproject.toml` or `setup.py`.
 
 2. **Commit changes** and create a branch:

@@ -14,7 +14,6 @@ nav_order: 12
 
 ## Viola Morgia
 
-### Role in the Group
 I primarily worked on coding the application and contributed to the report sections that we divided among the team. I also collaborated with my colleagues to ensure consistency and completeness throughout the project.
 
 ### Strengths

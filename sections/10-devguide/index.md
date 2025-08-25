@@ -1,7 +1,7 @@
 
-# Developer Guide – Food Waste Manager
+# Developer Guide – WASTED
 
-This guide helps new developers join the **Food Waste Manager** project, set up their environment, and start contributing effectively.
+This guide helps new developers join the **WASTED** project, set up their environment, and start contributing effectively.
 
 
 ## 1. Team & Communication
@@ -45,8 +45,8 @@ This guide helps new developers join the **Food Waste Manager** project, set up 
 * **Branches**:
 
   * `main` → stable release branch
-  * `dev` → active development
-  * `feature/<name>` → for new features
+  * Individual development branches → each team member has their own development branch, e.g., `Sara`, `Viola`, `Mai`.  
+  * `yourname` → for new features
 
 
 ## 4. Development Environment
@@ -55,8 +55,8 @@ This guide helps new developers join the **Food Waste Manager** project, set up 
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-repo>/food-waste-manager.git
-cd food-waste-manager
+git clone https://github.com/unibo-dtm-se-2425-Wasted/report.git
+cd wasted
 
 # 2. Create virtual environment
 python -m venv venv
@@ -79,7 +79,7 @@ streamlit run app.py
 1. Create a feature branch:
 
    ```bash
-   git checkout -b feature/<feature-name>
+   git checkout -b `yourname`
    ```
 2. Implement your changes.
 3. Test locally:
@@ -88,7 +88,7 @@ streamlit run app.py
    streamlit run app.py
    ```
 4. Commit with meaningful messages.
-5. Push branch and create a Pull Request into `dev`.
+5. Push branch and create a Pull Request into `yourname`.
 6. Once reviewed, it will be merged into `main`.
 
 

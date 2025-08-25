@@ -1,0 +1,68 @@
+@startuml
+
+' ===============================
+' CLASSES
+' ===============================
+
+package "DB" #ffebcd {
+  class DatabaseManager {
+    - db_path : str
+    --
+    + create_connection() : Connection
+    + initialize_db()
+    + insert_food_item(user, name, category, purchase_date, expiration_date, quantity, unit, price_per_unit)
+    + get_all_food_items(user) : List<FoodItem>
+    + delete_food_item(item_id, user)
+    + add_user(username, password)
+    + check_user_credentials(username, password)
+  }
+}
+
+package "Logic" #ccffcc {
+  class StatusChecker {
+    + check_status(expiration_date: str) : str
+  }
+
+  class StatisticsCalculator {
+    + calculate_statistics(df) : (int, int, int, float)
+  }
+}
+
+package "Entity" #cce5ff {
+  class User {
+    - username : str
+    - password_hash : str
+  }
+
+  class FoodItem {
+    - id : int
+    - user : str
+    - name : str
+    - category : str
+    - purchase_date : str
+    - expiration_date : str
+    - quantity : float
+    - unit : str
+    - price_per_unit : float
+  }
+}
+
+package "External" #fff2b2 {
+  class RecipeService {
+    - api_key : str
+    --
+    + get_recipes(ingredients: List<str>) : List<dict>
+  }
+}
+
+' ===============================
+' RELATIONSHIPS
+' ===============================
+
+User "1" -- "*" FoodItem : owns
+DatabaseManager --> FoodItem : persists
+StatusChecker --> FoodItem : checks status
+StatisticsCalculator --> FoodItem : analyzes
+RecipeService ..> FoodItem : uses ingredients
+
+@enduml

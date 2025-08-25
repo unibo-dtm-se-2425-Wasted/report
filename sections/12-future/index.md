@@ -1,73 +1,57 @@
----
-title: Future work
-has_children: false
-nav_order: 13
----
 
-# Known issues and future work
+# Future Improvements
 
-This section should describe:
-- What is missing
-- What does not work as it should
-- Potential future developments to improve/expand the software
+## 1. Current Limitations
 
-N.B. Be honest, no impact on the final mark.
-Although the current version of the Food Waste Manager provides a functional prototype, several areas remain incomplete or require refinement. This section outlines existing limitations and possible future developments.
+The Food Waste Manager application is currently functional as a web application, but several limitations remain:
 
-1.What is Missing?
+* **Platform Availability**: The app can only be accessed through a web browser; no dedicated mobile application exists.
+* **Notifications**: Users do not receive proactive alerts through email, SMS, or push notifications. They must log in manually to check for expiring items.
+* **Authentication**: User login/logout functionality is basic, without password protection, account recovery, or multi-user support.
+* **Editing and Deleting**: Although supported, these features are not fully streamlined for efficient user interaction (e.g., inline edits or batch operations).
+* **Interface**: The design is primarily optimized for desktop use and lacks mobile responsiveness.
 
-Notifications & Reminders: At present, expiration alerts only appear in the interface. Proactive notifications (via email, push messages, or SMS) are not yet implemented.
 
-User Authentication: The app only supports a simple username login. Secure authentication with passwords and account management is missing.
+## 2. Known Issues
 
-Full Item Management: While users can add food items, editing and deleting entries is still limited.
+* **Date Handling**: Errors can still occur if expiration dates are missing or invalid.
+* **Recipe API Integration**: At times, images provided do not match the actual recipes, and results may be incomplete when only a few ingredients are supplied.
+* **Performance**: The local SQLite database may face scalability issues when handling large datasets.
 
-Mobile Optimization: The current design is desktop-focused and not fully responsive for mobile devices.
 
-2.What Does Not Work as Intended?
+## 3. Potential Future Developments
 
-Date Handling: Invalid or missing expiration dates sometimes generate errors when calculating food status.
+### Cross-Platform and Mobile Application
 
-Recipe API Integration: The recipe API provides a wide variety of results, but occasionally the images do not match the actual recipe content, which can confuse users.
+* Development of a dedicated mobile application (Android and iOS) using frameworks such as Flutter or React Native.
+* Introduction of mobile push notifications for items nearing expiration.
+* Offline functionality with synchronization when the device reconnects to the internet.
 
-Recipe Suggestions Reliability: If ingredients are too few or the API limit is reached, results may be incomplete or irrelevant.
+### Enhanced Notifications
 
-3.Potential Future Developments?
+* Integration of email, SMS, and mobile notifications.
+* Calendar synchronization with Google Calendar or Microsoft Outlook.
+* Intelligent reminders based on food usage patterns, suggesting recipes aligned with ingredients that are about to expire.
 
-3.1. Enhanced Notifications
+### Improved User Experience
 
-Push and mobile notifications for items about to expire.
+* Implementation of barcode or QR code scanning for automatic food entry.
+* A mobile-first interface design including accessibility features and dark mode.
+* Verification and curation of recipe images to ensure accuracy.
 
-Calendar integration (Google/Outlook).
+### Data and Insights
 
-AI-powered reminders (e.g., “Use tomatoes and cheese today for a pasta dish”).
+* Dashboards providing analytics on food consumption, cost savings, and estimated environmental impact (e.g., CO₂ reduction).
+* Options for users to export their data to CSV or Excel for further analysis.
 
-3.2. Improved User Experience (UX)
+### Community and Integrations
 
-Barcode scanning for automatic food entry.
+* Integration with services such as Too Good To Go and local food donation networks.
+* A community feature enabling users to share recipes and ideas for using items near expiration.
+* Gamification strategies to encourage continued use and reduce food waste.
 
-Modern, mobile-first design with dark mode and accessibility features.
+### Scalability and Technical Enhancements
 
-Cleaner, verified images for recipes (e.g., using an additional API or internal image curation).
-
-3.3. Data & Insights
-
-Show money and CO₂ savings based on prevented waste.
-
-Personal consumption trends and analytics.
-
-Exportable reports in CSV/Excel.
-
-3.4. Community & Integrations
-
-Integration with Too Good To Go or local donation platforms for surplus food.
-
-A community recipe-sharing feature where users can upload photos and ideas using expiring items.
-
-3.5. Scalability
-
-Migration from SQLite to a cloud-hosted database.
-
-Multi-user support (families, roommates).
-
-IoT integration (smart fridges, kitchen devices).
+* Migration from SQLite to a cloud-hosted database (e.g., PostgreSQL, Firebase, Supabase).
+* Multi-user support for households and shared living environments.
+* Potential integration with smart kitchen devices or IoT-enabled appliances.

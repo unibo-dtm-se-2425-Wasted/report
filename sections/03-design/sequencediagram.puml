@@ -1,0 +1,66 @@
+@startuml
+skinparam participant {
+  BackgroundColor<<User>> #ADD8E6
+  BackgroundColor<<UI>> #90EE90
+  BackgroundColor<<Logic>> #FFD700
+  BackgroundColor<<DB>> #FFB6C1
+  BackgroundColor<<API>> #FFA500
+  BorderColor black
+}
+
+actor User <<User>>
+participant "Streamlit UI" as UI <<UI>>
+participant "App Logic" as Logic <<Logic>>
+database "SQLite DB" as DB <<DB>>
+participant "Spoonacular API" as API <<API>>
+
+== User Authentication ==
+User -> UI : Opens app
+UI -> Logic : Prompt login/signup
+User -> UI : Enters username & password
+UI -> Logic : check_user_credentials(username, password)
+Logic -> DB : Query users table
+DB --> Logic : Return password hash
+Logic -> UI : Valid / Invalid login
+UI -> User : Show success or error message
+
+== Sign Up (optional) ==
+User -> UI : Enters new username & password
+UI -> Logic : add_user(username, password)
+Logic -> DB : Insert into users table
+DB --> Logic : Acknowledgement
+Logic -> UI : Show "Account created"
+UI -> User : Informs that account is ready
+
+== Add Food Item ==
+User -> UI : Fills form and clicks "Add Item"
+UI -> Logic : Validate input
+Logic -> DB : insert_food_item(user, name, category, purchase_date, expiration_date, quantity, unit, price_per_unit)
+DB --> Logic : Acknowledgement
+Logic -> UI : Show success popup
+UI -> User : Displays "Item Added" message
+
+== Delete Food Item ==
+User -> UI : Clicks "Delete" on an item
+UI -> Logic : confirm_delete(item_id, name)
+Logic -> User : Show confirmation dialog
+User -> Logic : Confirms deletion
+Logic -> DB : delete_food_item(item_id, user)
+DB --> Logic : Acknowledgement
+Logic -> UI : Show "Item Deleted" message
+UI -> User : Updates list of items
+
+== Get Recipe Suggestion ==
+User -> UI : Clicks "What Can I Cook Today?"
+UI -> Logic : Get items with status "⚠️ Expiring Soon"
+Logic -> API : Request recipes with ingredients
+API --> Logic : Returns recipe(s)
+Logic -> UI : Display recipe title, image, steps
+UI -> User : Shows recipe suggestion
+
+== Filter Items ==
+User -> UI : Selects status filters
+UI -> Logic : Filter DataFrame based on selected_status
+Logic --> UI : Return filtered DataFrame
+UI -> User : Displays filtered food list
+@enduml

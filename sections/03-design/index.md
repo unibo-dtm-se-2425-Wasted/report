@@ -6,94 +6,208 @@ nav_order: 4
 
 # Design
 
-This chapter explains the strategies used to meet the requirements identified in the analysis. 
+This chapter explains the strategies used to meet the requirements identified in the analysis.
 
-Ideally, the design should be the same, regardless of the technological choices made during the implementation phase.
+The design focuses on clear separation of concerns while reflecting the current technological choices (Streamlit frontend + integrated backend).
 
-> You can re-order the sections as you prefer, but all the sections must be present in the end
+## Architectural style: 3-tier architecture 
 
-## Architecture 
+A **3-tier architecture** was adopted to separate concerns: UI, business logic, and data persistence.  
+This clear division makes the project easier to maintain, scale, and test, with well-defined boundaries that simplify debugging.
 
-- Which architectural style (e.g. layered, object-based, event-based, shared dataspace)? Why? Why not the others?
-- Provide details about the actual architecture (e.g. N-tier, hexagonal, etc.) you are going to adopt. Motivate your choice.
-- Provide a high-level overview of the architecture, possibly with a diagram
-- Describe the responsibilities of each architectural component
+---
 
-> UML Components diagrams are welcome here
+### 1. Presentation layer (frontend)
+- **Technology**: Streamlit (Python-based UI components).  
+- **Responsibility**: Provides the user interface for interaction directly within Streamlit.  
+- Includes dashboard, login/signup, food item display, filtering, and statistics visualization.  
 
-## Infrastructure (mostly applies to distributed systems)
+---
 
-- Are there **infrastructural components** that need to be introduced? Which and **how many** of each?
-    - e.g. **clients**, **servers**, **load balancers**, **caches**, **databases**, **message brokers**, **queues**, **workers**, **proxies**, **firewalls**, **CDNs**, etc.
-- How do components **distribute** over the network? **Where** are they located?
-    - e.g. do servers / brokers / databases / etc. sit on the same machine? on the same network? on the same datacenter? on the same continent?
-- How do components **find** each other?
-    - How to **name** components?
-    - e.g. **DNS**, **service discovery**, **load balancing**, etc.
+### 2. Application layer (backend)
+- **Technology**: Python (integrated with Streamlit).  
+- **Responsibility**: Handles business logic such as:  
+  - Tracking and updating food items  
+  - Expiration date checking  
+  - Waste statistics calculation  
+  - Recipe suggestion engine via Spoonacular API  
 
-> UML deployment diagrams are welcome here
+---
+
+### 3. Data layer (persistence)
+- **Database**: SQLite (local file).  
+- **Responsibility**: Stores food items, expiration dates, price information, and user credentials.  
+
+---
+
+![Component Diagram](componentdiagram.png)
+
+---
+
+## Infrastructure
+
+This is a **non-distributed** system in its initial version.
+
+- **Clients**: Streamlit app accessed via desktop, tablet, or mobile.  
+- **Server**: Integrated in Streamlit (local execution or deployed container).  
+- **Database**: SQLite file stored locally with the app.  
+- **External API**: Spoonacular (via HTTPS, for recipe suggestions).  
+
+---
+
+### Deployment considerations
+
+- All components are co-located in a single app instance.  
+- Streamlit handles serving the application without a separate web server.  
+- Offline mode is supported via the local SQLite database.  
+
+---
 
 ## Modelling
 
-### Domain driven design (DDD) modelling
+### Domain-Driven Design (DDD)
 
-- Which are the bounded contexts of your domain? 
-- Which are domain concepts (entities, value objects, aggregates, etc.) for each context?
-- Are there repositories, services, or factories for each/any domain concept?
-- What are the relavant domain events in each context?
+#### Bounded contexts
 
-> Context map diagrams are welcome here
+- **Inventory management**  
+- **Waste statistics**  
+- **Recipe suggestion engine**  
 
-### Object-oriented modelling
+---
 
-- What are the main data types (e.g. classes) of the system?
-- What are the main attributes and methods of each data type?
-- How do data types relate to each other?
+#### Domain concepts
 
-> UML class diagrams are welcome here
+| Context             | Entity / Aggregate | Description                                                        |
+|---------------------|--------------------|--------------------------------------------------------------------|
+| Inventory           | `FoodItem`         | Represents a stored food item with metadata (owner, dates, price). |
+| Waste Statistics    | `Statistics`       | Tracks expired vs valid items and economic loss.                   |
+| Recipe Suggestion   | `RecipeQuery` / `Recipe` | Models interaction with the external recipe API.              |
+| User Management     | `User`             | Represents an authenticated user of the system.                    |
 
-### In case of a distributed system
+---
 
-- How do the domain concepts map to the architectural or infrastuctural components?
-    + i.e. which architectural/component is responsible for which domain concept?
-    + are there data types which are required onto multiple components? (e.g. messages being exchanged between components)
+#### Repositories / Services
 
-- What are the domain concepts or data types which represent the state of the distributed system?
-    + e.g. state of a video game on central server, while inputs/representations on clients
-    + e.g. where to store messages in an instant-messaging app? for how long?
+- `FoodItemRepository`: Handles CRUD operations in SQLite.  
+- `StatisticsService`: Computes waste statistics (expired, valid, loss in €).  
+- `RecipeService`: Communicates with Spoonacular API.  
+- `UserRepository`: Handles signup/login and credential verification.  
 
-- Are there domain concepts or data types which represent messages being exchanged between components?
-    + e.g. messages between clients and servers, messages between servers, messages between clients
+---
+
+#### Domain events
+
+- `FoodItemAdded`  
+- `FoodItemExpired`  
+- `FoodItemDeleted`  
+- `WasteStatisticsUpdated`  
+
+---
+
+### Object-oriented modelling (conceptual)
+
+The class diagram shown here is conceptual and represents the logical organization of the system according to an OOP model.  
+The actual code is written in a functional style, using functions and Pandas DataFrames, without formal Python classes.  
+
+#### Main classes and attributes
+
+![Class Diagram](classdiagram+.png)
+
+---
 
 ## Interaction
 
-- How do components *communicate*? *When*? *What*?
+### Component Communication
 
-- Which **interaction patterns** do they enact?
+#### Frontend ↔ Backend integrated in Streamlit
 
-> UML sequence diagrams are welcome here
+| Action                 | Function / Method Called                           | Description                                                                 |
+|------------------------|---------------------------------------------------|-----------------------------------------------------------------------------|
+| User signup            | `add_user(username, password)`                     | Creates a new user with hashed password.                                    |
+| User login             | `check_user_credentials(username, password)`       | Verifies user credentials and starts a session if valid.                    |
+| Add food item          | `insert_food_item(...)`                            | Adds a new food item to the inventory (with price info).                    |
+| Get all items          | `get_all_food_items(user)`                         | Retrieves the inventory list for the current user.                          |
+| Get expiring items     | `check_status(expiration_date)` + filtering        | Retrieves items that are expiring soon.                                     |
+| Delete food item       | `delete_food_item(item_id, user)`                  | Deletes a food item by its ID.                                              |
+| Get recipe suggestions | `"What Can I Cook Today?"` button (Spoonacular API)| Suggests recipes using soon-to-expire ingredients.                          |
+| Get waste statistics   | `calculate_statistics(df)`                         | Computes statistics (total, expired, valid, and lost €).                    |
+
+---
+
+#### Sequence diagram (Add item)
+
+![Sequence Diagram](sequencediagram.png)
+
+---
 
 ## Behaviour
 
-- How does **each** component *behave* individually (e.g., in *response* to *events* or messages)?
-    + Some components may be *stateful*, others *stateless*
+### Component behaviour overview
 
-- Which components are in charge of updating the **state** of the system? *When*? *How*?
+#### Backend
 
-> UML state diagrams or activity diagrams are welcome here
+- **Stateful**: Maintains application logic and interacts with the database  
+- Updates state when:
+  - Food items are added, edited, or deleted  
+  - Waste statistics are calculated  
+  - Recipe API is queried  
 
-## Data-related aspects (in case persistent storage is needed)
+#### Frontend
 
-- Is there any data that needs to be stored?
-    - *What* data? *Where*? *Why*?
+- **Stateless**, except for UI state or session data  
+- Fetches and displays data via API  
 
-- How should **persistent data** be **stored**? Why?
-    - e.g., relations, documents, key-value, graph, etc.
+---
 
-- Which components perform queries on the database?
-    - *When*? *Which* queries? *Why*?
-    - Concurrent read? Concurrent write? Why?
+## Data-related aspects
 
-- Is there any data that needs to be shared between components?
-    - *Why*? *What* data?
+### Persistent data
 
+#### What is stored
+- Food items: name, category, purchase date, expiration date, quantity, unit, price per unit.  
+- User accounts: username, password hash.  
+- Derived statistics (calculated at runtime, not persisted).
+
+#### Where
+- Stored in **SQLite** (local file-based DB)
+
+#### Why
+- Ensures persistence across sessions and device restarts
+
+---
+
+### Storage type
+
+- **Relational Database (SQLite)**  
+- Simple schema, structured data, suited for local deployment
+
+#### Tables
+
+- `food_items`  
+- `users`  
+
+---
+
+### Data queries
+
+- All database access is handled internally via Python/SQLite:  
+  - `CREATE` for adding tables  
+  - `INSERT` for new records  
+  - `SELECT` for queries and dashboards  
+  - `DELETE` for removing items  
+  - `JOIN` (optional) for multi-table queries if schema evolves  
+
+---
+
+## Concurrency considerations
+
+- Single-user Streamlit app + SQLite → minimal concurrency issues  
+
+---
+
+### Data sharing
+
+- Shared between:  
+  - Backend and frontend (via API responses)  
+  - Backend and AI API (for recipe suggestions)  
+- Not shared among users (single-user system)  

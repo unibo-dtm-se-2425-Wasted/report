@@ -5,27 +5,79 @@ nav_order: 7
 ---
 
 # Release
+From the project’s codebase, the following artefacts are generated:
 
-- Which and how many artefacts are produced from your project's codebase?
-- Onto which repositories (e.g. PyPI, Docker Hub, GitHub Packages, NPM etc.) are they released? Why?
-- How are they released (e.g. manually, automatically, etc.)?
-   + report the configuration steps and commands to run to release the artefacts
+1. **Python package**
+   - `food_waste_manager-X.Y.Z.tar.gz` → **Source Distribution (sdist)** containing raw source code and metadata.
+   - `food_waste_manager-X.Y.Z-py3-none-any.whl` → **Wheel (binary distribution)**, pre-built for faster installation.
+   - Both artefacts include the Streamlit app and Python modules (`app.py`, `db/database.py`, tests).
 
-## Choice of the license
+# Publishing repository
+- **PyPI** (public or private) for the Python package.  
+  *Reason:* Easy installation via `pip`.
 
-- Which license did you choose for your artefacts? Why?
-- Which license did you choose for your code? Why?
+# Release process
+Releases are automated with **GitHub Actions**.
 
-## Choice of the versioning schema
+# General configuration
+1. Create `.github/workflows/release.yml`.
+2. Trigger the workflow on **tag push** (`vX.Y.Z`) in GitHub.
+3. Workflow steps:
+   - Run tests (`pytest` / `unittest`).
+   - Build Python package (`python -m build`).
+   - Publish to PyPI with `twine upload dist/*`.
 
-- Which versioning schema (e.g. date-based versioning, SemVer, etc.) did you choose for your artefacts? Why?
-   + how does the versioning schema work?
 
-- In case of multiple artefacts, are the version numbers aligned or each artefact has its own versioning pace? Why?
+# Manual release commands
+```bash
+# 1. Update version in pyproject.toml or setup.py
+# 2. Build Python package
+python -m build
 
-- Describe when and how to create a new version of the artefacts in your project
-   + e.g. when to increment the major, minor, and patch version numbers
-   + e.g. how to create a new release branch
-   + e.g. how to create a new tag
-   + e.g. how to create a new release on GitHub
+# 3. Publish to PyPI
+twine upload dist/*
 
+```
+
+
+
+
+# Choice of the versioning schema
+
+We use **Semantic Versioning (SemVer)**: `MAJOR.MINOR.PATCH`
+
+- **MAJOR** → Breaking API changes or major refactors.  
+- **MINOR** → Backward-compatible new features.  
+- **PATCH** → Bug fixes and small improvements.  
+
+---
+
+# Multiple artefacts
+
+All artefacts share the same version number:
+- Ensures traceability.
+- Guarantees the package corresponds exactly to the same code as the Python package. 
+
+---
+
+# Creating a new version
+
+# Creating a new version
+
+1. **Update the version** in `pyproject.toml` or `setup.py`.
+
+2. **Commit changes** and create a branch:
+
+```bash
+git checkout -b release/X.Y.Z
+git commit -am "Release X.Y.Z"
+```
+3. **Tag the release:**
+```bash
+git tag vX.Y.Z
+git push origin vX.Y.Z
+
+GitHub Actions will automatically:
+Build and publish the Python package to PyPI.
+Create a GitHub Release linked to the tag and add release notes.
+```

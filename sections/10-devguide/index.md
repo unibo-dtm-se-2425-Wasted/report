@@ -1,96 +1,102 @@
----
-title: Developer guide
-has_children: false
-nav_order: 11
----
 
-## Developer Guide
+# Developer Guide – Food Waste Manager
 
-This section provides guidance for new developers joining the **Wasted** project. It explains how to set up the environment, follow internal conventions, and contribute effectively.
-
-### 1. Team & Communication
-
-* **Contact**: The development team can be reached via the shared project email or the university course repository.
-* **Issue Reporting**: Bugs, feature requests, and questions should be reported in the project’s GitHub Issues page. Always include steps to reproduce and screenshots if applicable.
-
-### 2. Conventions & Coding Style
-
-* **Language**: Python 3.11 with Streamlit for the web interface, SQLite for the database.
-* **Naming Conventions**:
-  * Variables and functions → mostly `snake_case`, with occasional `camelCase` in Streamlit session state or UI components.
-  * Classes → `PascalCase` (rarely used, since the project is mostly function-based).
-  * Constants → not consistently formalized, but written in uppercase when present.
-* **Comments**: Comments are added for non-trivial logic, while function names are generally chosen to be self-explanatory. Docstrings are used in some functions, but not systematically across the project.
-* **Code Formatting**: Formatting is applied manually with a focus on readability and consistency, though some minor inconsistencies may remain.
+This guide helps new developers join the **Food Waste Manager** project, set up their environment, and start contributing effectively.
 
 
-### 3. Development Environment
+## 1. Team & Communication
 
-3.1. **Clone the Repository**
+* **Repository**: Hosted on GitHub under the team account.
+* **Contact**: Communication is managed through GitHub Issues & Discussions.
+* **Reporting Issues**:
+
+  * Open an Issue on GitHub.
+  * Use clear labels: `bug`, `feature`, `documentation`.
+  * Include screenshots, logs, or reproduction steps when possible.
+
+
+## 2. Project Overview
+
+* **Frontend**: Built with **Streamlit** (Python web framework).
+* **Database**: Uses **SQLite** (`data/food_items.db`) – automatically created if missing.
+* **Features**:
+
+  * Add, edit, delete food items.
+  * Track expiration dates and status (Expired / Expiring Soon / Fresh).
+  * User authentication (basic login/logout).
+  * Recipe suggestions via external API (images may sometimes mismatch recipes).
+
+
+## 3. Conventions
+
+* **Naming**:
+
+  * Files → `snake_case.py`
+  * Variables & functions → `snake_case`
+  * Classes → `PascalCase`
+* **Style**:
+
+  * Follow [PEP 8](https://peps.python.org/pep-0008/).
+  * Use meaningful commit messages:
+
+    * `feat: add logout button`
+    * `fix: handle null expiration dates`
+    * `docs: update developer guide`
+* **Branches**:
+
+  * `main` → stable release branch
+  * `dev` → active development
+  * `feature/<name>` → for new features
+
+
+## 4. Development Environment
+
+### Setup Steps
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/<your-repo>/food-waste-manager.git
+cd food-waste-manager
+
+# 2. Create virtual environment
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Run the app
+streamlit run app.py
+```
+
+* The **SQLite database** is located in `data/food_items.db`.
+* It initializes automatically on first run.
+
+
+## 5. Development Workflow
+
+1. Create a feature branch:
 
    ```bash
-   git clone https://github.com/<project-repo>.git
-   cd food-waste-manager
+   git checkout -b feature/<feature-name>
    ```
-3.2. **Set Up Virtual Environment**
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # (Mac/Linux)
-   venv\Scripts\activate      # (Windows)
-   ```
-3.3. **Install Dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-3.4. **Run the App**
+2. Implement your changes.
+3. Test locally:
 
    ```bash
    streamlit run app.py
    ```
-3.5. **Database**
-
-   * The project uses **SQLite**, with the database file located in `/data/food_items.db`.
-   * The schema initializes automatically if the file does not exist.
-
-### 4. Workflow
-
-* **Branching Model**:
-
-* `main` → stable production branch.  
-* Individual development branches → each team member has their own development branch, e.g., `Mai`, `Sara`, `Viola`.  
-* Feature work → create a new branch from your personal development branch, typically named after the feature, e.g., `feature/feature-name`.
+4. Commit with meaningful messages.
+5. Push branch and create a Pull Request into `dev`.
+6. Once reviewed, it will be merged into `main`.
 
 
-    ```bash
-    git checkout -b feature/<feature-name>
-    ```
+## 6. Tools & Recommendations
 
-* **Commits**: Follow clear messages in the form:
-
-  ```
-  [type]: short description
-  ```
-
-  Examples:
-
-  * `feat: add logout button`
-  * `fix: handle null expiration dates`
-  * `docs: update developer guide`
-
-* **Pull Requests (PRs)**:
-
-  * Create PRs into development branches.
-  * At least one reviewer must approve before merging.
-  * Use draft PRs for work-in-progress features.
-
-### 5.Tools & IDE
-
-* **IDE**: Recommended → **VS Code** with Python, GitLens, and Black extensions.
-* **Version Control**: GitHub is the central repository.
-* **Command Line**: Developers should be comfortable running Git commands, activating the virtual environment, and starting the Streamlit server.
-
-
+* **IDE**: Visual Studio Code with Python, Black, and GitLens extensions.
+* **Database Tool**: DB Browser for SQLite (optional for inspecting DB).
+* **Version Control**: GitHub (all code and releases are maintained here).
+* **APIs**: Recipe API (external dependency). Handle mismatched images gracefully.
 
 

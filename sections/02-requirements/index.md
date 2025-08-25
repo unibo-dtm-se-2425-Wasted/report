@@ -62,13 +62,13 @@ To identify key personas and their activities, we defined the following user sto
 | **External API usage** | The system must integrate with a third-party AI API (Spooncular), to implement recipe suggestions.| Developing an in-house recipe engine is outside the scope and requires massive domain knowledge and datasets. |
 
 ---
-
 ### Glossary
 
-| **Food item**        | A product stored by the user, with metadata (name, category, dates, quantity, unit).           |
-| **Dashboard**        | The main screen where all stored food items are listed and managed.                            |
-| **Soon-to-expire**   | A food item that will expire within a pre-defined time window (3 days).                  |
-| **Recipe suggestion**| A feature that matches soon-to-expire ingredients with predefined recipes.                     |
-| **Waste statistics** | A module that tracks expired and consumed food to calculate waste percentages and costs.       |
-| **Expiry date** | The date after which a food item is considered expired.       |
----
+| **Term**              | **Description**                                                                                     |
+|-----------------------|-----------------------------------------------------------------------------------------------------|
+| **Food item**         | A product stored by the user, with metadata (name, category, dates, quantity, unit).               |
+| **Dashboard**         | The main screen where all stored food items are listed and managed.                                 |
+| **Soon-to-expire**    | A food item that will expire within a pre-defined time window (3 days).                             |
+| **Recipe suggestion** | A feature that matches soon-to-expire ingredients with predefined recipes.                          |
+| **Waste statistics**  | A module that tracks expired and consumed food to calculate waste percentages and costs.           |
+| **Expiry date**       | The date after which a food item is considered expired.                                             |

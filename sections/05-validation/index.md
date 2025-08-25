@@ -1,76 +1,52 @@
----
-title: Validation
-has_children: false
-nav_order: 6
----
+# Validation Report
 
-# Validation
+## Testing Approach
 
-## Testing approach
+The testing strategy for this project primarily relies on unit testing to validate core application logic and database interactions in isolation. The project does not strictly adhere to Test-Driven Development (TDD) but ensures that tests are written alongside new features to confirm their correctness and reliability.
 
-The testing approach in this project focused mainly on **unit testing**, to validate both application logic and database operations in isolation.  
-The project did not explicitly follow Test-Driven Development (TDD), but tests were written alongside feature implementation to ensure correctness and reliability.
+The `unittest` framework, a standard library in Python, was chosen for its clear structure, ease of use, and seamless integration with the project.
 
-The testing framework used is **`unittest`**, as it is included in the Python standard library, provides a clear structure for organizing tests, and integrates easily with Python projects.
+## Automated Testing
 
-## Testing (automated)
+### Unit Testing
 
-### Unit testing
+Unit tests were developed to validate individual functions and methods, with a strong focus on two main areas:
 
-Unit tests were developed to validate individual functions and methods, especially for:
+- **Application logic**: Validating the `calculate_statistics` function to ensure accurate computation of metrics such as total items, expired items, and valid items from a DataFrame.
 
-- **Application logic:** Testing the `calculate_statistics` function to ensure correct computation of totals, expired items, and valid items in a DataFrame.  
-- **Database operations:** Ensuring correct insertion and retrieval of food items, including edge cases such as zero quantity.  
+- **Database operations**: Comprehensive testing of database functions to guarantee correct insertion, retrieval, and management of data. This now includes:
+  - **Food items**: Ensuring proper handling of food items, including edge cases like zero quantity. The test `test_insert_zero_quantity` specifically verifies that a food item can be stored even with a quantity of 0.
+  - **User authentication**: A new suite of tests was added to validate user management functions, including `add_user` and `check_user_credentials`. These tests cover successful user creation and login, as well as failure scenarios such as incorrect passwords (`test_add_and_login_user`) and attempts to create duplicate users (`test_duplicate_user`). The use of a temporary in-memory database for these tests ensures a clean state for each test run, isolating them from the main application database.
 
-Unit tests were developed to validate individual functions and methods, especially for:
+**Rationale:** Unit tests are crucial for verifying that individual components function as intended in a controlled environment. This approach significantly reduces the risk of bugs and simplifies debugging by pinpointing the exact source of an issue.
 
-- **Database operations:** Ensuring correct insertion and retrieval of food items, including edge cases such as zero quantity.  
-- **Application logic:** Testing functions like `calculate_statistics` to ensure correct computation of totals, expired items, and valid items in a DataFrame.  
+#### Success Rate and Coverage
 
-**Rationale:** Unit tests ensure that core functions work as expected in isolation, reducing the risk of bugs propagating through the system.  
+- **Success Rate:** 100% of all automated tests passed successfully.
+- **Coverage:** The tests provide robust coverage of the core backend logic, including database handling for both food items and user management, along with the application's statistical calculations. The Streamlit UI and external dependencies are not covered by these tests.
 
-**Success rate and coverage:**  
-- Success rate: 100% of executed tests passed.  
-- Approximate coverage: 85% of backend logic, including database handling and app logic, but excluding Streamlit UI interactions.
+### Integration and System Testing
 
-### Integration testing
-Integration tests focused on **database operations combined with application logic**, for example:
+While dedicated automated integration and system tests were not developed, their functionality was indirectly validated. Unit tests for database operations and application logic, combined with manual acceptance testing, confirm that the main components (UI, database, and backend logic) interact as expected.
 
-- Inserting data into the database and retrieving it to ensure consistency.  
-- Running statistics calculations on retrieved data to verify end-to-end correctness.  
+### Manual Acceptance Testing
 
-**Rationale:** Ensures that different components (database + application functions) interact correctly.  
+Manual testing was conducted to validate the application from an end-user perspective. These tests focused on key functional requirements and user scenarios:
 
-**Success rate:** 100%  
-**Coverage:** Covers database and logic integration, no external services tested.  
+- **User interactions:**
+  - Adding, modifying, and deleting food items through the UI.
+  - Creating new users and logging in with both correct and incorrect credentials.
+- **Data integrity:** Verifying that the statistics displayed in the application's UI accurately reflect the data stored in the database.
 
-**Test doubles:** None were used, as SQLite test database served as an isolated environment for integration testing.
+**Rationale:** This manual validation ensures the system's overall usability and that it meets the user's expectations in a real-world scenario.
 
-### System testing
+**Success Rate:** All manual acceptance tests passed successfully.
 
-System tests were not fully automated, but the combination of database unit tests and app logic unit tests effectively validates the system behavior at a small-scale level.
+## Future Improvements
 
+To further strengthen the project's validation process, the following improvements are planned for future iterations:
 
-## Acceptance tests (manual)
-
-Manual testing was performed to validate the system as a whole:
-
-- Adding, modifying, and deleting food items through the UI to ensure proper interaction with the backend.  
-- Checking that statistics displayed on the app correspond correctly to database contents.  
-
-**Test rationale:** Matches the expected user scenarios and functional requirements.  
-**Success rate:** All acceptance tests passed successfully.
-ying, and deleting food items through the UI to ensure proper interaction with the backend.  
-- Checking that statistics displayed on the app correspond correctly to database contents.  
-
-**Rationale:** These tests match the main functional requirements and replicate expected user interactions.  
-
-**Success rate:** All acceptance tests passed successfully.  
-
-## Future improvements
-
-To strengthen validation, the following improvements are planned:  
-- Add **integration tests** combining database and app logic.  
-- Extend unit tests to cover **edge cases** (invalid dates, empty fields, unsupported units).  
-- Develop **system-level tests** to automatically check end-to-end functionality.  
-- Evaluate **performance testing** to measure scalability with larger datasets.  
+- **Automated Integration Tests:** Develop specific tests that combine database operations with application logic (e.g., insert data into the database and then run the `calculate_statistics` function on the retrieved data).
+- **Expanded Unit Tests:** Add more tests to cover a wider range of edge cases, such as invalid date formats, empty input fields, and unsupported units.
+- **Automated System Tests:** Create automated tests that simulate end-to-end user flows, matching the acceptance criteria to improve validation coverage and efficiency.
+- **Performance Testing:** Introduce performance tests to measure the application's scalability and responsiveness with larger datasets.

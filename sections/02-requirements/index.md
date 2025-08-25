@@ -31,6 +31,8 @@ To identify key personas and their activities, we defined the following user sto
 ---
 ### Functional requirements (FR)
 
+---
+
 | Title                                   | Requirement                                                                                          | Acceptance Criteria                                                                                          |
 |-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | **Add food items**                         | The system shall allow users to add food items with details: name, category, purchase & expiry dates, quantity, unit and price. | Users can successfully input all required data into a form and save it.                                      |
@@ -40,8 +42,11 @@ To identify key personas and their activities, we defined the following user sto
 | **Recipe suggestions**                     | The system shall suggest recipes based on the ingredients that are about to expire.                 | Users can view a list of recipes where most ingredients are about to expire.                                |
 | **Waste statistics and insights**          | The system shall track expired vs consumed items and display waste statistics (e.g., % of wasted items, estimated cost). | Users can view waste statistics in the app showing trends and data visualizations.                          |
 | **Filter by food status**          | The user can filter the list by the food item’s status (OK, Expiring Soon, Expired). |  The system shall provide a Filter section in the sidebar, allowing users to narrow down the displayed list of food items based on selected criteria.                         |
+
 ---
+
 ### Non-functional requirements (NFR)
+
 ---
 
 | Title                                    | Requirement                                                                                               | Acceptance Criteria                                  |

@@ -4,19 +4,9 @@ has_children: false
 nav_order: 11
 ---
 
-# Developer Guide
-
-This section explains how can a new person enter the development team and start contributing to the project.
-- report any relevant organizational information (e.g. how to contact the team, how to report issues, etc.)
-- report any internal convention that the team follows (e.g. naming conventions, coding style, etc.)
-- report any relevant information about the development environment (e.g. how to set it up, how to run the tests, etc.)
-- report any relevant information about the development workflow (e.g. how to create a new feature branch, how to create a pull request, etc.)
-- report any relevant information about the development tools (e.g. how to configure the IDE, how to use the command line, etc.)
-
-
 ## Developer Guide
 
-This section provides guidance for new developers joining the **Food Waste Manager** project. It explains how to set up the environment, follow internal conventions, and contribute effectively.
+This section provides guidance for new developers joining the **Wasted** project. It explains how to set up the environment, follow internal conventions, and contribute effectively.
 
 ### 1. Team & Communication
 
@@ -27,12 +17,12 @@ This section provides guidance for new developers joining the **Food Waste Manag
 
 * **Language**: Python 3.11 with Streamlit for the web interface, SQLite for the database.
 * **Naming Conventions**:
+  * Variables and functions → mostly `snake_case`, with occasional `camelCase` in Streamlit session state or UI components.
+  * Classes → `PascalCase` (rarely used, since the project is mostly function-based).
+  * Constants → not consistently formalized, but written in uppercase when present.
+* **Comments**: Comments are added for non-trivial logic, while function names are generally chosen to be self-explanatory. Docstrings are used in some functions, but not systematically across the project.
+* **Code Formatting**: Formatting is applied manually with a focus on readability and consistency, though some minor inconsistencies may remain.
 
-  * Variables and functions → `snake_case`
-  * Classes → `PascalCase`
-  * Constants → `ALL_CAPS`
-* **Comments**: Use inline comments for tricky logic and docstrings for functions.
-* **Code Formatting**: We recommend using **Black** (autoformatter) and **flake8** (linting).
 
 ### 3. Development Environment
 
@@ -68,9 +58,10 @@ This section provides guidance for new developers joining the **Food Waste Manag
 
 * **Branching Model**:
 
-  * `main` → stable production branch.
-  * `dev` → development branch.
-  * Feature work → create a new branch:
+* `main` → stable production branch.  
+* Individual development branches → each team member has their own development branch, e.g., `Mai`, `Sara`, `Viola`.  
+* Feature work → create a new branch from your personal development branch, typically named after the feature, e.g., `feature/feature-name`.
+
 
     ```bash
     git checkout -b feature/<feature-name>
@@ -90,7 +81,7 @@ This section provides guidance for new developers joining the **Food Waste Manag
 
 * **Pull Requests (PRs)**:
 
-  * Create PRs into `dev`.
+  * Create PRs into development branches.
   * At least one reviewer must approve before merging.
   * Use draft PRs for work-in-progress features.
 
@@ -99,9 +90,7 @@ This section provides guidance for new developers joining the **Food Waste Manag
 * **IDE**: Recommended → **VS Code** with Python, GitLens, and Black extensions.
 * **Version Control**: GitHub is the central repository.
 * **Command Line**: Developers should be comfortable running Git commands, activating the virtual environment, and starting the Streamlit server.
-* **Optional Tools**:
 
-  * **SQLite Browser** for inspecting the database.
-  * **Postman/Insomnia** if API testing is needed.
+
 
 

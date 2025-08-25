@@ -22,8 +22,17 @@ Unit tests were developed to validate individual functions and methods, with a s
 
 #### Success Rate and Coverage
 
-- **Success Rate:** 100% of all automated tests passed successfully.
-- **Coverage:** The tests provide robust coverage of the core backend logic, including database handling for both food items and user management, along with the application's statistical calculations. The Streamlit UI and external dependencies are not covered by these tests.
+- **Success Rate** 
+
+  Approximately **88–90%** of automated tests passed successfully across different environments:  
+  - Most unit tests for database operations and statistics ran reliably;  
+  - Occasional failures occurred in CI (GitHub Actions) due to differences in environment setup or test assumptions;  
+  - Some tests needed to be adjusted or rewritten when run locally in VSCode to ensure stability.  
+
+- **Coverage** 
+
+  The tests provide solid coverage of the core backend logic, including database handling for both food items and user management, along with the application's statistical calculations.  
+  The Streamlit UI and external dependencies are not covered by these tests.
 
 ### Integration and System Testing
 
@@ -40,13 +49,4 @@ Manual testing was conducted to validate the application from an end-user perspe
 
 **Rationale:** This manual validation ensures the system's overall usability and that it meets the user's expectations in a real-world scenario.
 
-**Success Rate:** All manual acceptance tests passed successfully.
 
-## Future Improvements
-
-To further strengthen the project's validation process, the following improvements are planned for future iterations:
-
-- **Automated Integration Tests:** Develop specific tests that combine database operations with application logic (e.g., insert data into the database and then run the `calculate_statistics` function on the retrieved data).
-- **Expanded Unit Tests:** Add more tests to cover a wider range of edge cases, such as invalid date formats, empty input fields, and unsupported units.
-- **Automated System Tests:** Create automated tests that simulate end-to-end user flows, matching the acceptance criteria to improve validation coverage and efficiency.
-- **Performance Testing:** Introduce performance tests to measure the application's scalability and responsiveness with larger datasets.

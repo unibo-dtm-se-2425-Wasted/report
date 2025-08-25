@@ -14,10 +14,28 @@ participant "App Logic" as Logic <<Logic>>
 database "SQLite DB" as DB <<DB>>
 participant "Spoonacular API" as API <<API>>
 
+== User Authentication ==
+User -> UI : Opens app
+UI -> Logic : Prompt login/signup
+User -> UI : Enters username & password
+UI -> Logic : check_user_credentials(username, password)
+Logic -> DB : Query users table
+DB --> Logic : Return password hash
+Logic -> UI : Valid / Invalid login
+UI -> User : Show success or error message
+
+== Sign Up (optional) ==
+User -> UI : Enters new username & password
+UI -> Logic : add_user(username, password)
+Logic -> DB : Insert into users table
+DB --> Logic : Acknowledgement
+Logic -> UI : Show "Account created"
+UI -> User : Informs that account is ready
+
 == Add Food Item ==
 User -> UI : Fills form and clicks "Add Item"
 UI -> Logic : Validate input
-Logic -> DB : insert_food_item(user, name, category, purchase_date, expiration_date, quantity, unit)
+Logic -> DB : insert_food_item(user, name, category, purchase_date, expiration_date, quantity, unit, price_per_unit)
 DB --> Logic : Acknowledgement
 Logic -> UI : Show success popup
 UI -> User : Displays "Item Added" message

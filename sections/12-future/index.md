@@ -55,5 +55,3 @@ The Food Waste Manager application is currently functional as a web application,
 * Migration from SQLite to a cloud-hosted database (e.g., PostgreSQL, Firebase, Supabase).
 * Multi-user support for households and shared living environments.
 * Potential integration with smart kitchen devices or IoT-enabled appliances.
-
-

@@ -1,5 +1,5 @@
 
-# Developer Guide – WASTED
+# Developer Guide 
 
 This guide helps new developers join the **WASTED** project, set up their environment, and start contributing effectively.
 

@@ -1,49 +1,52 @@
----
-title: Validation
-has_children: false
-nav_order: 6
----
+# Validation Report
 
-# Validation
+## Testing Approach
 
-## Testing approach
+The testing strategy for this project primarily relies on unit testing to validate core application logic and database interactions in isolation. The project does not strictly adhere to Test-Driven Development (TDD) but ensures that tests are written alongside new features to confirm their correctness and reliability.
 
-- Describe what approach you followed for testing your software
-- If you followed TDD, describe it here
-- Also mention which testing framework you used (e.g. `unittest` or `pytest`) and why
+The `unittest` framework, a standard library in Python, was chosen for its clear structure, ease of use, and seamless integration with the project.
 
-## Testing (automated)
+## Automated Testing
 
-> General recommendation: when discussing the tests below, please track to which requirement each test is related to.
+### Unit Testing
 
-### Unit testing
+Unit tests were developed to validate individual functions and methods, with a strong focus on two main areas:
 
-- Describe the unit tests you developed, and their rationale
-- Report success rate and test coverage here
+- **Application logic**: Validating the `calculate_statistics` function to ensure accurate computation of metrics such as total items, expired items, and valid items from a DataFrame.
 
-### Integration testing
+- **Database operations**: Comprehensive testing of database functions to guarantee correct insertion, retrieval, and management of data. This now includes:
+  - **Food items**: Ensuring proper handling of food items, including edge cases like zero quantity. The test `test_insert_zero_quantity` specifically verifies that a food item can be stored even with a quantity of 0.
+  - **User authentication**: A new suite of tests was added to validate user management functions, including `add_user` and `check_user_credentials`. These tests cover successful user creation and login, as well as failure scenarios such as incorrect passwords (`test_add_and_login_user`) and attempts to create duplicate users (`test_duplicate_user`). The use of a temporary in-memory database for these tests ensures a clean state for each test run, isolating them from the main application database.
 
-- Describe couples of components that you tested together, and the corresponding test rationale/plan
+**Rationale:** Unit tests are crucial for verifying that individual components function as intended in a controlled environment. This approach significantly reduces the risk of bugs and simplifies debugging by pinpointing the exact source of an issue.
 
-- Report success rate and test coverage here
+#### Success Rate and Coverage
 
-- If you used [test doubles](https://en.wikipedia.org/wiki/Test_double), describe her which type of double you used, and why
+- **Success Rate** 
 
-### System testing
+  Approximately **88–90%** of automated tests passed successfully across different environments:  
+  - Most unit tests for database operations and statistics ran reliably;  
+  - Occasional failures occurred in CI (GitHub Actions) due to differences in environment setup or test assumptions;  
+  - Some tests needed to be adjusted or rewritten when run locally in VSCode to ensure stability.  
 
-- Describe the tests that you developed to automatically test the system as a whole
-    + and the corresponding test rationale/plan
-    + better would be to have system tests that match the acceptance criteria of the requirements
+- **Coverage** 
 
-- Report success rate and test coverage here
+  The tests provide solid coverage of the core backend logic, including database handling for both food items and user management, along with the application's statistical calculations.  
+  The Streamlit UI and external dependencies are not covered by these tests.
 
-- If you adopted containers (e.g. Docker compose) for testing, describe how you used them here
-    + e.g. to run the system in a clean environment, or to run the tests in a clean environment
+### Integration and System Testing
 
-## Acceptance tests (manual)
+While dedicated automated integration and system tests were not developed, their functionality was indirectly validated. Unit tests for database operations and application logic, combined with manual acceptance testing, confirm that the main components (UI, database, and backend logic) interact as expected.
 
-- If you did any manual testing, describe it here
-- Report the test rationale/plan so that another person can repeat the tests
-    + better would be for acceptance tests to match the acceptance criteria of the requirements
-- Report success rate here
+### Manual Acceptance Testing
+
+Manual testing was conducted to validate the application from an end-user perspective. These tests focused on key functional requirements and user scenarios:
+
+- **User interactions:**
+  - Adding, modifying, and deleting food items through the UI.
+  - Creating new users and logging in with both correct and incorrect credentials.
+- **Data integrity:** Verifying that the statistics displayed in the application's UI accurately reflect the data stored in the database.
+
+**Rationale:** This manual validation ensures the system's overall usability and that it meets the user's expectations in a real-world scenario.
+
 

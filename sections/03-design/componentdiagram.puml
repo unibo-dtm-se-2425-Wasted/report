@@ -1,0 +1,48 @@
+@startuml
+skinparam ArrowColor black
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam component {
+  BackgroundColor<<UI>> #D4E6F1
+  BackgroundColor<<Logic>> #D5F5E3
+  BackgroundColor<<DB>> #FADBD8
+  BackgroundColor<<External>> #F9E79F
+  BorderColor black
+  FontColor black
+}
+
+rectangle "Layer 1 — Streamlit UI" as L1 {
+  [Login Page] as UI_Login <<UI>>
+  [Sidebar (Add Item + Filters)] as UI_Sidebar <<UI>>
+  [Food List & Delete UI] as UI_List <<UI>>
+  [Meal Inspiration UI] as UI_Meal <<UI>>
+  [Analysis Dashboard] as UI_Analysis <<UI>>
+}
+
+rectangle "Layer 2 — Application Logic" as L2 {
+  [Status Checker] as LOG_Status <<Logic>>
+  [Statistics Calculator] as LOG_Stats <<Logic>>
+}
+
+rectangle "Layer 3 — Database Layer" as L3 {
+  [database.py] as DB_Code <<DB>>
+  [food_items.db] as DB_File <<DB>>
+}
+
+[Spoonacular API] as Ext_Spoon <<External>>
+
+' --- Flussi (tutti neri) ---
+UI_Login --> DB_Code : validate user
+UI_Sidebar --> DB_Code : insert / query / filter
+UI_List --> DB_Code : get_all / delete
+
+UI_Meal --> Ext_Spoon : request recipes
+Ext_Spoon --> UI_Meal : JSON response
+UI_Meal --> LOG_Status
+
+UI_Analysis --> LOG_Stats
+LOG_Stats --> DB_Code : fetch data
+
+DB_Code --> DB_File : SQL ops
+DB_File --> DB_Code : results
+@enduml

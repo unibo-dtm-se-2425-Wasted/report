@@ -10,21 +10,21 @@ This chapter explains the strategies used to meet the requirements identified in
 
 The design focuses on clear separation of concerns while reflecting the current technological choices (Streamlit frontend + integrated backend).
 
-# Architectural style: 3-tier architecture 
+## Architectural style: 3-tier architecture 
 
 A **3-tier architecture** was adopted to separate concerns: UI, business logic, and data persistence.  
 This clear division makes the project easier to maintain, scale, and test, with well-defined boundaries that simplify debugging.
 
 ---
 
-## 1. Presentation layer (frontend)
+### 1. Presentation layer (frontend)
 - **Technology**: Streamlit (Python-based UI components).  
 - **Responsibility**: Provides the user interface for interaction directly within Streamlit.  
 - Includes dashboard, login/signup, food item display, filtering, and statistics visualization.  
 
 ---
 
-## 2. Application layer (backend)
+### 2. Application layer (backend)
 - **Technology**: Python (integrated with Streamlit).  
 - **Responsibility**: Handles business logic such as:  
   - Tracking and updating food items  
@@ -34,7 +34,7 @@ This clear division makes the project easier to maintain, scale, and test, with 
 
 ---
 
-## 3. Data layer (persistence)
+### 3. Data layer (persistence)
 - **Database**: SQLite (local file).  
 - **Responsibility**: Stores food items, expiration dates, price information, and user credentials.  
 
@@ -44,7 +44,7 @@ This clear division makes the project easier to maintain, scale, and test, with 
 
 ---
 
-# Infrastructure
+## Infrastructure
 
 This is a **non-distributed** system in its initial version.
 
@@ -55,7 +55,7 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-## Deployment considerations
+### Deployment considerations
 
 - All components are co-located in a single app instance.  
 - Streamlit handles serving the application without a separate web server.  
@@ -63,11 +63,11 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-# Modelling
+## Modelling
 
-## Domain-Driven Design (DDD)
+### Domain-Driven Design (DDD)
 
-### Bounded contexts
+#### Bounded contexts
 
 - **Inventory management**  
 - **Waste statistics**  
@@ -75,7 +75,7 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-### Domain concepts
+#### Domain concepts
 
 | Context             | Entity / Aggregate | Description                                                        |
 |---------------------|--------------------|--------------------------------------------------------------------|
@@ -86,7 +86,7 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-### Repositories / Services
+#### Repositories / Services
 
 - `FoodItemRepository`: Handles CRUD operations in SQLite.  
 - `StatisticsService`: Computes waste statistics (expired, valid, loss in €).  
@@ -95,7 +95,7 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-### Domain events
+#### Domain events
 
 - `FoodItemAdded`  
 - `FoodItemExpired`  
@@ -104,19 +104,22 @@ This is a **non-distributed** system in its initial version.
 
 ---
 
-# Object-oriented modelling (conceptual)
-The class diagram shown here is conceptual and represents the logical organization of the system according to an OOP model.
-The actual code is written in a functional style, using functions and Pandas DataFrames, without formal Python classes.
-## Main classes and attributes
+### Object-oriented modelling (conceptual)
 
-![Class Diagram](classdiagram.png)
+The class diagram shown here is conceptual and represents the logical organization of the system according to an OOP model.  
+The actual code is written in a functional style, using functions and Pandas DataFrames, without formal Python classes.  
+
+#### Main classes and attributes
+
+![Class Diagram](classdiagram+.png)
+
 ---
 
-# Interaction
+## Interaction
 
-## Component Communication
+### Component Communication
 
-### Frontend ↔ Backend integrated in Streamlit
+#### Frontend ↔ Backend integrated in Streamlit
 
 | Action                 | Function / Method Called                           | Description                                                                 |
 |------------------------|---------------------------------------------------|-----------------------------------------------------------------------------|
@@ -131,82 +134,80 @@ The actual code is written in a functional style, using functions and Pandas Dat
 
 ---
 
-### Sequence diagram (Add item)
+#### Sequence diagram (Add item)
 
 ![Sequence Diagram](sequencediagram.png)
 
 ---
 
-# Behaviour
+## Behaviour
 
-## Component behaviour overview
+### Component behaviour overview
 
-# Backend
+#### Backend
 
-- **Stateful**: Maintains application logic and interacts with the database
+- **Stateful**: Maintains application logic and interacts with the database  
 - Updates state when:
-  - Food items are added, edited, or deleted
-  - Waste statistics are calculated
-  - Recipe API is queried
+  - Food items are added, edited, or deleted  
+  - Waste statistics are calculated  
+  - Recipe API is queried  
 
-# Frontend
+#### Frontend
 
-- **Stateless**, except for UI state or session data
-- Fetches and displays data via API
+- **Stateless**, except for UI state or session data  
+- Fetches and displays data via API  
 
+---
 
-# Data-related aspects
+## Data-related aspects
 
-# Persistent data
+### Persistent data
 
-### What is stored
+#### What is stored
 - Food items: name, category, purchase date, expiration date, quantity, unit, price per unit.  
 - User accounts: username, password hash.  
 - Derived statistics (calculated at runtime, not persisted).
 
-# Where:
-
+#### Where
 - Stored in **SQLite** (local file-based DB)
 
-# Why:
-
+#### Why
 - Ensures persistence across sessions and device restarts
 
 ---
 
-# Storage type
+### Storage type
 
 - **Relational Database (SQLite)**  
 - Simple schema, structured data, suited for local deployment
 
-# Tables:
+#### Tables
 
-- `food_items`
-- `users`
+- `food_items`  
+- `users`  
+
 ---
 
-# Data queries
+### Data queries
 
 - All database access is handled internally via Python/SQLite:  
-  - `CREATE` for adding tables.  
-  - `INSERT` for new records.  
-  - `SELECT` for queries and dashboards.  
-  - `DELETE` for removing items.  
-  - `JOIN` (optional) for multi-table queries if schema evolves.  
-
-
----
-
-# Concurrency considerations
-
-- Single-user Streamlit app + SQLite → minimal concurrency issues
+  - `CREATE` for adding tables  
+  - `INSERT` for new records  
+  - `SELECT` for queries and dashboards  
+  - `DELETE` for removing items  
+  - `JOIN` (optional) for multi-table queries if schema evolves  
 
 ---
 
-## Data sharing
+## Concurrency considerations
 
-- Shared between:
-  - Backend and frontend (via API responses)
-  - Backend and AI API (for recipe suggestions)
-- Not shared among users (single-user system)
+- Single-user Streamlit app + SQLite → minimal concurrency issues  
 
+---
+
+### Data sharing
+
+- Shared between:  
+  - Backend and frontend (via API responses)  
+  - Backend and AI API (for recipe suggestions)  
+- Not shared among users (single-user system)  

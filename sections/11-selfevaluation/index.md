@@ -4,13 +4,6 @@ has_children: false
 nav_order: 12
 ---
 
-# Self-evaluation
-
-- An individual section is required for each member of the group
-- Each member must self-evaluate their work, listing the strengths and weaknesses of the product
-- Each member must describe their role within the group as objectively as possible
-    + Each student is only responsible for their own section
-
 ---
 title: Self-evaluation
 has_children: false
@@ -33,7 +26,7 @@ The product has some limitations. It is currently based on SQLite, so there is n
 ### Overall Evaluation
 Despite its limitations, I am very pleased with this initial version. It effectively meets the project goals and provides a solid foundation for future enhancements.
 
-# Sara Marrocolo
+## Sara Marrocolo
 
 My main contribution was writing and organizing the report, making sure it was clear and consistent. I also joined the meetings and brainstorming sessions, where I shared ideas and discussed solutions with the team. In addition, I helped by revising the code written by my colleagues to keep it in line with the report.
 
@@ -42,11 +35,11 @@ The teamwork was effective, and the way we divided the tasks among the team memb
 
 The project still has some areas of improvement. For example, it is currently based on a single SQLite database. In the future, the database could be made shareable among multiple users at the same time, so that housemates living together can manage and track their food collectively.
 
-# Vu Ngoc Mai Nguyen
+## Vu Ngoc Mai Nguyen
 
 ### Strengths of the Product
 
-I genuinely love the idea behind our application. The Food Waste Manager tackles a real social and environmental issue by helping people reduce food waste, while also improving their personal planning and saving money. The integration of recipes, expiration reminders, and categorization makes the app both practical and user-friendly. One of the strongest aspects is the simplicity and clarity of the interface, which makes it easy for users to quickly input items and monitor their status. Another strength is the collaborative effort of the team: every member brought improvements that made the app more complete than the initial raw version.
+I genuinely love the idea behind our application. Wasted tackles a real social and environmental issue by helping people reduce food waste, while also improving their personal planning and saving money. The integration of recipes, expiration reminders, and categorization makes the app both practical and user-friendly. One of the strongest aspects is the simplicity and clarity of the interface, which makes it easy for users to quickly input items and monitor their status. Another strength is the collaborative effort of the team: every member brought improvements that made the app more complete than the initial raw version.
 
 ### Weaknesses of the Product
 

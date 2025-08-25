@@ -42,6 +42,7 @@ To identify key personas and their activities, we defined the following user sto
 | **Filter by food status**          | The user can filter the list by the food item’s status (OK, Expiring Soon, Expired). |  The system shall provide a Filter section in the sidebar, allowing users to narrow down the displayed list of food items based on selected criteria.                         |
 ---
 ### Non-functional requirements (NFR)
+---
 
 | Title                                    | Requirement                                                                                               | Acceptance Criteria                                  |
 |------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------|

@@ -11,7 +11,6 @@ The Food Waste Manager application is currently functional as a web application,
 * **Editing and Deleting**: Although supported, these features are not fully streamlined for efficient user interaction (e.g., inline edits or batch operations).
 * **Interface**: The design is primarily optimized for desktop use and lacks mobile responsiveness.
 
----
 
 ## 2. Known Issues
 
@@ -19,7 +18,6 @@ The Food Waste Manager application is currently functional as a web application,
 * **Recipe API Integration**: At times, images provided do not match the actual recipes, and results may be incomplete when only a few ingredients are supplied.
 * **Performance**: The local SQLite database may face scalability issues when handling large datasets.
 
----
 
 ## 3. Potential Future Developments
 

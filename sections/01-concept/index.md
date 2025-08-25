@@ -4,7 +4,7 @@ has_children: false
 nav_order: 2
 ---
 
-# Project concept: "smart fridge & pantry management"
+# Project concept: "smart fridge and pantry management"
 
 ---
 
@@ -20,15 +20,15 @@ The application aims to support users in managing food items at home to reduce w
 
 * **Where are the users?** Users are individuals or families who manage their groceries and food supplies within their **homes**.
 * **When and how frequently do they interact with the system?** Users will interact with the system **daily or several times a week**. Interaction primarily occurs:
-    * When adding new purchases or removing consumed/expired products (after grocery shopping or during meal preparation).
-    * When checking expiring food items to plan meals.
-    * When viewing alerts about products nearing expiration (displayed within the application).
+    * When adding new purchases or removing consumed/expired products (after grocery shopping or during meal preparation);
+    * When checking expiring food items to plan meals;
+    * When asking for recipes inspiration.
 * **How do they interact with the system? Which devices are they using?** Interaction happens through a standard web interface. Users will utilize **web browser-enabled devices**, primarily for **tablets or smartphones** for quick checks or while shopping,  but also for **desktops or laptops** for data entry and an overview.
-* **Does the system need to store user's data? Which data? Where?** Yes, the system **needs to store user data**.
-    * **Data stored:**
-        * Information about **food items**: product name, category (e.g., dairy, vegetables, meat), purchase and expiration dates, quantity, unit of measurement.
-        * Data related to **waste statistics**: proportion of expired versus consumed products, estimated economic loss due to waste.
-    * **Where:** This data will be stored in a **SQLite database**, managed by the Sreamlit backend logic.
+* **Does the system need to store user's data? Which data? Where?** Yes, the system **needs to store user data** that will be stored in a **SQLite database**, managed by the Sreamlit backend logic.
+    * **Food items data**: product name, category (e.g., dairy, vegetables, meat), purchase and expiration dates, quantity, unit of measurement and price.
+    * **Waste statistics data**: proportion of expired versus consumed products, estimated economic loss due to waste.
+    * **User data**: username and password
+   
 
 ---
 

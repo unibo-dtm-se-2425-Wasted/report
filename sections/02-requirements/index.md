@@ -10,14 +10,17 @@ nav_order: 3
 
 To identify key personas and their activities, we defined the following user stories:
 
-- *As a student with limited budget, I want notifications for expiring items, so I can avoid unnecessary waste.*
-- *As a health-conscious person, I want to filter my pantry by food category (vegetables, meat, etc.), so I can check what I still have before shopping.*
-- *As an environmentally-conscious user, I want to see statistics about how much food I wasted or saved, so I can improve my habits.*
+
+### Persona 1: Michela (student)
+
+* As a **student with limited budget**, I want a tool that checks expiring items, so I can avoid unnecessary waste.
+* As a **health-conscious** person, I want to filter my pantry by food category (vegetables, meat, etc.), so I can check what I still have before shopping.
+* As an **environmentally-conscious** user, I want to see statistics about how much food I wasted or saved, so I can improve my habits.
 
 ### Persona 2: Fred (parent)
-- *As a busy parent, I want to keep track of the food in my fridge, so I don’t accidentally let products expire and waste money.*
-- *As a parent, I want to see which items are about to expire, so I can plan meals around them.*
-- *As a parent, I want recipe suggestions based on soon-to-expire food, so I can quickly decide what to cook.*
+* As a busy parent, I want to keep track of the food in my fridge, so I don’t accidentally let products expire and waste money.
+* As a parent, I want to see which items are about to expire, so I can plan meals around them.
+* As a parent, I want recipe suggestions based on soon-to-expire food, so I can quickly decide what to cook.
 
 ---
 
@@ -30,10 +33,10 @@ To identify key personas and their activities, we defined the following user sto
 
 | Title                                   | Requirement                                                                                          | Acceptance Criteria                                                                                          |
 |-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| **Add food items**                         | The system shall allow users to add food items with details: name, category, purchase & expiry dates, quantity, and unit. | Users can successfully input all required data into a form and save it.                                      |
+| **Add food items**                         | The system shall allow users to add food items with details: name, category, purchase & expiry dates, quantity, unit and price. | Users can successfully input all required data into a form and save it.                                      |
 | **Display food dashboard**                 | The system shall display all stored food items on a dashboard, sorted by the date they were added.           | Users see an organized list of food.                                    |
 | **Highlight soon-to-expire items**         | The system shall visually highlight items close to expiry ( within 3 days) in yellow and the expired ones in red.             | Items nearing expiry or expired are clearly marked  on the dashboard.                                             |
-| **in-app notifications**        | The system shall notify users when adding ore deleting food items through visual alerts. | Users receive notifications inside the app and optionally via push notifications (if enabled).               |
+| **In-app notifications**        | The system shall notify users when adding ore deleting food items through visual alerts. | Users receive notifications inside the app.             |
 | **Recipe suggestions**                     | The system shall suggest recipes based on the ingredients that are about to expire.                 | Users can view a list of recipes where most ingredients are about to expire.                                |
 | **Waste statistics and insights**          | The system shall track expired vs consumed items and display waste statistics (e.g., % of wasted items, estimated cost). | Users can view waste statistics in the app showing trends and data visualizations.                          |
 | **Filter by food status**          | The user can filter the list by the food item’s status (OK, Expiring Soon, Expired). |  The system shall provide a Filter section in the sidebar, allowing users to narrow down the displayed list of food items based on selected criteria.                         |

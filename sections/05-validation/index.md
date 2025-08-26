@@ -1,4 +1,4 @@
-# Validation Report
+# Validation
 
 ## Testing Approach
 
@@ -8,7 +8,7 @@ The `unittest` framework, a standard library in Python, was chosen for its clear
 
 ## Automated Testing
 
-### Unit Testing
+### 1. Unit Testing
 
 Unit tests were developed to validate individual functions and methods, with a strong focus on two main areas:
 
@@ -18,7 +18,9 @@ Unit tests were developed to validate individual functions and methods, with a s
   - **Food items**: Ensuring proper handling of food items, including edge cases like zero quantity. The test `test_insert_zero_quantity` specifically verifies that a food item can be stored even with a quantity of 0.
   - **User authentication**: A new suite of tests was added to validate user management functions, including `add_user` and `check_user_credentials`. These tests cover successful user creation and login, as well as failure scenarios such as incorrect passwords (`test_add_and_login_user`) and attempts to create duplicate users (`test_duplicate_user`). The use of a temporary in-memory database for these tests ensures a clean state for each test run, isolating them from the main application database.
 
-#### Success Rate and Coverage
+
+
+### 2. Success Rate and Coverage
 
 **Success Rate** 
 
@@ -32,11 +34,15 @@ Unit tests were developed to validate individual functions and methods, with a s
   The tests provide solid coverage of the core backend logic, including database handling for both food items and user management, along with the application's statistical calculations.  
   The Streamlit UI and external dependencies are not covered by these tests.
 
-### Integration and System Testing
+
+
+### 3. Integration and System Testing
 
 While dedicated automated integration and system tests were not developed, their functionality was indirectly validated. Unit tests for database operations and application logic, combined with manual acceptance testing, confirm that the main components (UI, database, and backend logic) interact as expected.
 
-### Manual Acceptance Testing
+
+
+### 4. Manual Acceptance Testing
 
 Manual testing was conducted to validate the application from an end-user perspective. It ensures the system's overall usability and that it meets the user's expectations in a real-world scenario.
 These tests focused on key functional requirements and user scenarios:

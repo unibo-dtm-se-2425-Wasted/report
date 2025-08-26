@@ -31,8 +31,6 @@ To identify key personas and their activities, we defined the following user sto
 ---
 ### Functional requirements (FR)
 
----
-
 | Title                                   | Requirement                                                                                          | Acceptance Criteria                                                                                          |
 |-----------------------------------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | **Add food items**                         | The system shall allow users to add food items with details: name, category, purchase & expiry dates, quantity, unit and price. | Users can successfully input all required data into a form and save it.                                      |
@@ -46,8 +44,6 @@ To identify key personas and their activities, we defined the following user sto
 ---
 
 ### Non-functional requirements (NFR)
-
----
 
 | Title                                    | Requirement                                                                                               | Acceptance Criteria                                  |
 |------------------------------------------|-----------------------------------------------------------------------------------------------------------|------------------------------------------------------|

@@ -52,6 +52,6 @@ The application uses SQLite for local storage. SQLite is included with Python by
 The app has been published on **Streamlit Cloud**, which allows it to be run directly without any local installation.  
 The official link to access the app is:
 
-[https://share.streamlit.io/<username>/<repository>/main/app.py](https://share.streamlit.io/<username>/<repository>/main/app.py)
+[https://wastedapp.streamlit.app//](https://wastedapp.streamlit.app//)
 
 This link always points to the latest version of the app based on the most recent commits to the main branch of the repository.

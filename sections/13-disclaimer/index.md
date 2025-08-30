@@ -1,0 +1,4 @@
+# Disclaimer
+# Use of Generative AI in the project
+
+Throughout the development of this project, tools such as ChatGPT and Gemini were used solely as programming aids. Their role was confined to assisting with code generation, clarifying the use of certain libraries, and suggesting possible implementations. All conceptual decisions, system design, and structural logic were entirely conceived and defined by the team. Any code produced with the help of AI was thoroughly reviewed, corrected, and adapted to ensure it aligned with our specific goals and quality standards. The authors take full responsibility for the final outcome and the content of this report.

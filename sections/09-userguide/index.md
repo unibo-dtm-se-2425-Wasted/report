@@ -18,7 +18,7 @@ This will start the Streamlit server and automatically open the application in t
 
 The application has also been deployed using Streamlit Cloud, so it can be accessed directly via a web link without running it locally.
 Users can simply open the link in any browser to use the app.
-[text](https://wastedapp.streamlit.app//)
+[https://wastedapp.streamlit.app//](https://wastedapp.streamlit.app//)
 
 # Login
 When opening the application, the user is first presented with the **Sign Up / Login page**.

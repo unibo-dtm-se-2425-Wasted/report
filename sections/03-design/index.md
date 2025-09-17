@@ -10,9 +10,9 @@ This chapter explains the strategies used to meet the requirements identified in
 
 The design focuses on clear separation of concerns while reflecting the current technological choices (Streamlit frontend + integrated backend).
 
-## Architectural style: 3-tier architecture 
+## Architectural style: 3-Layers architecture 
 
-A **3-tier architecture** was adopted to separate concerns: UI, business logic, and data persistence.  
+A **3-Layers architecture** was adopted to separate concerns: UI, business logic, and data persistence.  
 This clear division makes the project easier to maintain, scale, and test, with well-defined boundaries that simplify debugging.
 
 ---

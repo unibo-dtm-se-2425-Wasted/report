@@ -34,7 +34,7 @@ This experience improved our understanding of HTTP requests with the `requests` 
 One of the most valuable components is the `check_status` function, which automatically evaluates the expiration status of each item and assigns it a clear visual label ("✅ OK", "⚠️ Expiring Soon", "❌ Expired").  
 Although simple in logic, this function is central to the application’s usability, as it allows users to quickly assess the state of their food and take timely action to reduce waste.  
 
-Its design makes it easy to extend — for example, adding configurable thresholds for “Expiring Soon” or integrating price-based loss calculations — showing how thoughtful implementation supports future growth.  
+Its design makes it easy to extend for example, adding configurable thresholds for “Expiring Soon” or integrating price-based loss calculations,  showing how thoughtful implementation supports future growth.  
 
 **Network protocols:**  
 - HTTP/HTTPS is used for requests to the Spoonacular API via the `requests` library.  

@@ -18,7 +18,8 @@ This guide helps new developers join the **WASTED** project, set up their enviro
 ## 2. Project Overview
 
 **Frontend**: Built with **Streamlit** (Python web framework).
-**Database**: Uses **SQLite** (`data/food_items.db`) – automatically created if missing.
+**Database**: Uses **SQLite** (`data/food_items.db`)  automatically created if missing.
+
 **Features**:
 
   * Add, edit, delete food items.
@@ -34,6 +35,7 @@ This guide helps new developers join the **WASTED** project, set up their enviro
   * Files → `snake_case.py`
   * Variables & functions → `snake_case`
   * Classes → `PascalCase`
+  
 **Style**:
 
   * Follow [PEP 8](https://peps.python.org/pep-0008/).
@@ -95,8 +97,11 @@ streamlit run app.py
 ## 6. Tools & Recommendations
 
 **IDE**: Visual Studio Code with Python, Black, and GitLens extensions.
+
 **Database Tool**: DB Browser for SQLite (optional for inspecting DB).
+
 **Version Control**: GitHub (all code and releases are maintained here).
+
 **APIs**: Recipe API (external dependency). Handle mismatched images gracefully.
 
 
